@@ -1,8 +1,14 @@
 # 🇩🇪 Goethe A1 完整学习资源
 
+[![GitHub Pages](https://img.shields.io/badge/在线访问-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://820wusheng.github.io/goethe-a1-learning/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Skill](https://img.shields.io/badge/开发方式-Skill强制检查-orange?style=for-the-badge)](#-给开发者)
+
 完整的 Goethe-Zertifikat A1 (Start Deutsch 1) 学习资源，包含听力、阅读、写作、口语练习和词汇学习。
 
 **⭐ 特色**: 基于Skill开发，强制质量检查，避免历史错误
+
+**🌐 在线体验**: [https://820wusheng.github.io/goethe-a1-learning/](https://820wusheng.github.io/goethe-a1-learning/)
 
 ---
 
@@ -57,14 +63,32 @@ goethe-a1-exam/
 
 ## 🚀 快速开始
 
-### 1. 启动本地服务器
+### 🌐 在线访问（推荐）
+
+**无需安装，直接访问**：
+
+👉 **https://820wusheng.github.io/goethe-a1-learning/**
+
+- ✅ 手机/平板/电脑都可访问
+- ✅ 无需下载代码
+- ✅ 无需启动服务器
+- ✅ HTTPS安全加密
+- ✅ 全球CDN加速
+
+---
+
+### 💻 本地运行（开发用）
+
+如果需要本地开发或离线使用：
+
+#### 1. 启动本地服务器
 
 ```bash
-cd /Users/wusheng820/Downloads/goethe-a1-exam
+cd /path/to/goethe-a1-learning
 python3 -m http.server 8080
 ```
 
-### 2. 在浏览器中打开
+#### 2. 在浏览器中打开
 
 - **学习中心首页**：http://localhost:8080/html/index-main.html
 - **听力练习**：http://localhost:8080/html/listening-complete.html
