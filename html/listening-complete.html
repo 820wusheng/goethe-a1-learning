@@ -127,11 +127,109 @@
             margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
         }
 
         .option:hover {
             border-color: #667eea;
             background: #edf2f7;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e6f2ff;
+        }
+
+        .option.correct {
+            border-color: #48bb78;
+            background: #c6f6d5;
+        }
+
+        .option.incorrect {
+            border-color: #f56565;
+            background: #fed7d7;
+        }
+
+        .option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 20px;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .option.incorrect::after {
+            content: '✗';
+            position: absolute;
+            right: 20px;
+            color: #f56565;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .result-message.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #48bb78;
+            display: block;
+        }
+
+        .result-message.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #f56565;
+            display: block;
+        }
+
+        .score-board {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .score-board h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .score-board .score {
+            font-size: 2em;
+            font-weight: bold;
         }
 
         .transcript {
@@ -216,6 +314,14 @@
         <h1>🎧 Goethe A1 听力练习</h1>
         <div class="subtitle">完整版 - 包含所有题目和完整原文</div>
 
+        <div class="score-board">
+            <h3>📊 答题统计</h3>
+            <div class="score">
+                <span class="score-value">0 / 0</span>
+                <span class="score-percentage">(0%)</span>
+            </div>
+        </div>
+
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="showTeil('teil1')">Teil 1 (对话)</button>
             <button class="nav-tab" onclick="showTeil('teil2')">Teil 2 (通知)</button>
@@ -239,6 +345,112 @@
     </div>
 
     <script>
+        // 答题系统
+        let answers = {};
+        let userAnswers = {};
+        let submitted = {};
+
+        // 加载答案数据
+        async function loadAnswers() {
+            try {
+                const response = await fetch('../data/answers.json');
+                const data = await response.json();
+                answers = data.hoeren || {};
+                console.log('✓ 答案数据加载成功');
+            } catch (error) {
+                console.error('答案加载失败:', error);
+            }
+        }
+
+        // 选择答案
+        function selectOption(taskId, answer, element) {
+            if (submitted[taskId]) return;
+
+            const taskElement = element.closest('.task');
+            taskElement.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            element.classList.add('selected');
+            userAnswers[taskId] = answer;
+
+            const submitBtn = taskElement.querySelector('.submit-btn');
+            if (submitBtn) submitBtn.disabled = false;
+        }
+
+        // 提交答案
+        function submitAnswer(taskId) {
+            if (!userAnswers[taskId] || submitted[taskId]) return;
+
+            const correctAnswer = answers[taskId];
+            const userAnswer = userAnswers[taskId];
+            const isCorrect = userAnswer === correctAnswer;
+
+            submitted[taskId] = true;
+
+            const taskElement = document.getElementById('task-' + taskId);
+            if (!taskElement) return;
+
+            taskElement.querySelectorAll('.option').forEach(opt => {
+                const optAnswer = opt.dataset.answer;
+                if (optAnswer === correctAnswer) {
+                    opt.classList.add('correct');
+                }
+                if (optAnswer === userAnswer && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            const resultMsg = taskElement.querySelector('.result-message');
+            if (resultMsg) {
+                resultMsg.className = 'result-message ' + (isCorrect ? 'correct' : 'incorrect');
+                resultMsg.textContent = isCorrect ?
+                    '✓ 回答正确！' :
+                    `✗ 回答错误。正确答案是：${getOptionLabel(correctAnswer)}`;
+            }
+
+            const submitBtn = taskElement.querySelector('.submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = '已提交';
+            }
+
+            updateScore();
+        }
+
+        // 获取选项标签
+        function getOptionLabel(answer) {
+            const mapping = {
+                'a': 'a', 'b': 'b', 'c': 'c',
+                'richtig': 'Richtig', 'falsch': 'Falsch'
+            };
+            return mapping[answer] || answer;
+        }
+
+        // 更新分数
+        function updateScore() {
+            let correct = 0;
+            let total = 0;
+
+            Object.keys(submitted).forEach(taskId => {
+                if (submitted[taskId]) {
+                    total++;
+                    if (userAnswers[taskId] === answers[taskId]) {
+                        correct++;
+                    }
+                }
+            });
+
+            document.querySelectorAll('.score-value').forEach(el => {
+                el.textContent = `${correct} / ${total}`;
+            });
+
+            const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+            document.querySelectorAll('.score-percentage').forEach(el => {
+                el.textContent = `(${percentage}%)`;
+            });
+        }
+
         // 切换Teil
         function showTeil(teilId) {
             document.querySelectorAll('.teil-section').forEach(section => {
@@ -321,7 +533,7 @@
                 const taskNum = isExample ? '示例' : `题目 ${index}`;
 
                 html += `
-                    <div class="task">
+                    <div class="task" id="task-${q.id}">
                         <div class="task-header">
                             <div class="task-title">${taskNum}</div>
                             <div>
@@ -339,11 +551,14 @@
 
                         <div class="options">
                             ${q.opts.map((opt, i) => `
-                                <div class="option">
+                                <div class="option" data-answer="${String.fromCharCode(97 + i)}" onclick="selectOption('${q.id}', '${String.fromCharCode(97 + i)}', this)">
                                     <strong>${String.fromCharCode(97 + i)}</strong> ${opt}
                                 </div>
                             `).join('')}
                         </div>
+
+                        <button class="submit-btn" disabled onclick="submitAnswer('${q.id}')">提交答案</button>
+                        <div class="result-message"></div>
 
                         <div class="transcript">
                             <div class="transcript-header">
@@ -382,7 +597,7 @@
                 const taskNum = isExample ? '示例' : `题目 ${index + 6}`;
 
                 html += `
-                    <div class="task">
+                    <div class="task" id="task-${q.id}">
                         <div class="task-header">
                             <div class="task-title">${taskNum}</div>
                             <div>
@@ -399,9 +614,12 @@
                         <div class="task-question">${q.q}</div>
 
                         <div class="options">
-                            <div class="option"><strong>a</strong> Richtig 正确</div>
-                            <div class="option"><strong>b</strong> Falsch 错误</div>
+                            <div class="option" data-answer="richtig" onclick="selectOption('${q.id}', 'richtig', this)"><strong>a</strong> Richtig 正确</div>
+                            <div class="option" data-answer="falsch" onclick="selectOption('${q.id}', 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                         </div>
+
+                        <button class="submit-btn" disabled onclick="submitAnswer('${q.id}')">提交答案</button>
+                        <div class="result-message"></div>
 
                         <div class="transcript">
                             <div class="transcript-header">
@@ -437,7 +655,7 @@
                 if (!taskData) return;
 
                 html += `
-                    <div class="task">
+                    <div class="task" id="task-${q.id}">
                         <div class="task-header">
                             <div class="task-title">题目 ${index + 11}</div>
                             <div>
@@ -455,11 +673,14 @@
 
                         <div class="options">
                             ${q.opts.map((opt, i) => `
-                                <div class="option">
+                                <div class="option" data-answer="${String.fromCharCode(97 + i)}" onclick="selectOption('${q.id}', '${String.fromCharCode(97 + i)}', this)">
                                     <strong>${String.fromCharCode(97 + i)}</strong> ${opt}
                                 </div>
                             `).join('')}
                         </div>
+
+                        <button class="submit-btn" disabled onclick="submitAnswer('${q.id}')">提交答案</button>
+                        <div class="result-message"></div>
 
                         <div class="transcript">
                             <div class="transcript-header">
@@ -481,6 +702,7 @@
 
         // 页面加载时执行
         loadData();
+        loadAnswers();
     </script>
 </body>
 </html>
