@@ -1,0 +1,70 @@
+{
+  "bsp1": {
+    "german": "Frau: Ach, Verzeihung, wo finde ich Herrn Schneider vom Betriebsrat?\nMann: Schneider. Warten Sie mal. Ich glaube, der ist in Zimmer Nummer 254. Ja, stimmt, Zimmer 254. Das ist im zweiten Stock. Da können Sie den Aufzug hier nehmen.\nFrau: Zweiter Stock, Zimmer 254. Okay, vielen Dank.",
+    "chinese": "女士：哦，不好意思，我在哪里可以找到劳资委员会的施奈德先生？\n男士：施奈德。等一下。我想他在254号房间。是的，没错，254号房间。在二楼。你可以乘这里的电梯。\n女士：二楼，254号房间。好的，非常感谢。"
+  },
+  "1_1": {
+    "german": "Maria: Weißt du, wo es hier Kleidung für Kinder gibt?\nLaura: Oh, das weiß ich auch nicht. Aber sehen wir einmal auf die Information – Kinderspielzeug gibt es im vierten Stock, Damenkleidung im ersten. Hier: Im zweiten Stock findest du Kinderkleidung.",
+    "chinese": "玛丽亚：你知道这里哪里有儿童服装吗？\n劳拉：哦，我也不知道。但我们看看信息牌——儿童玩具在四楼，女装在一楼。这里：在二楼你能找到儿童服装。"
+  },
+  "1_2": {
+    "german": "Ober: Hier, bitte, die Speisekarte. Ich kann heute den Fisch empfehlen.\nDame: Nein, danke, ich mag keinen Fisch.\nOber: Dann vielleicht Hähnchen mit Pommes frites oder unseren Chefsalat mit Ei und Schinken?\nDame: Salat ist eine gute Idee. Den bringen Sie mir, bitte.",
+    "chinese": "服务员：这里，菜单。我今天推荐鱼。\n女士：不，谢谢，我不喜欢鱼。\n服务员：那也许鸡肉配薯条，或者我们的主厨沙拉配鸡蛋和火腿？\n女士：沙拉是个好主意。请给我来一份。"
+  },
+  "1_3": {
+    "german": "Student: Bitte eine Eintrittskarte für Studenten.\nFrau: Gern, aber das Museum schließt in einer halben Stunde.\nStudent: Ach, so früh schon!\nFrau: Ja, am Mittwochnachmittag schließen wir schon um 15 Uhr, aber an den anderen Tagen ist bis 18 Uhr geöffnet und am Donnerstag schließen wir erst um 22 Uhr.",
+    "chinese": "学生：请给我一张学生票。\n女士：好的，但博物馆半小时后就关门了。\n学生：啊，这么早！\n女士：是的，星期三下午我们3点就关门，但其他日子开到下午6点，星期四我们开到晚上10点。"
+  },
+  "1_4": {
+    "german": "Tim: Mein Arzt sagt, ich soll mehr Sport machen.\nKlaus: Richtig! Komm in meinen Verein, da kannst du Fußball spielen. Und am Wochenende laufe ich immer eine Stunde.\nTim: Nein, für mich ist Rad fahren das Beste – sagt mein Arzt. Laufen ist nichts für mich.",
+    "chinese": "蒂姆：我的医生说我应该多运动。\n克劳斯：对！来我的俱乐部，你可以踢足球。周末我总是跑步一小时。\n蒂姆：不，对我来说骑自行车最好——我医生说的。跑步不适合我。"
+  },
+  "1_5": {
+    "german": "Herr: Guten Tag, Frau Bauer. Machen Sie dieses Jahr wieder Urlaub am Meer oder bleiben Sie zu Haus?\nDame: Nein. Wir waren in den letzten Jahren immer am Meer. Dieses Jahr besuchen wir unsere Verwandten in Süddeutschland. Die freuen sich schon sehr. Und wohin fahren Sie?",
+    "chinese": "先生：您好，鲍尔女士。今年您又去海边度假还是待在家里？\n女士：不。过去几年我们总是去海边。今年我们要去南德看望亲戚。他们已经很期待了。您去哪里？"
+  },
+  "1_6": {
+    "german": "Dame: Du, Bruno, wie lange fliegst du von hier nach München?\nBruno: Nicht lange, nur 50 Minuten. Aber ich muss eine halbe Stunde vor dem Abflug im Flughafen sein und bis zum Flughafen brauche ich auch noch 45 Minuten.\nDame: Dann geht es doch nicht so schnell.",
+    "chinese": "女士：布鲁诺，你从这里飞到慕尼黑要多久？\n布鲁诺：不长，只要50分钟。但我必须在起飞前半小时到机场，到机场还需要45分钟。\n女士：那也不是那么快。"
+  },
+  "bsp2": {
+    "german": "Frau Katrin Gundlach, angekommen aus Budapest, wird zum Informationsschalter in der Ankunftshalle C gebeten. Frau Gundlach bitte zum Informationsschalter in der Ankunftshalle C.",
+    "chinese": "从布达佩斯抵达的卡特琳·贡德拉赫女士，请到C到达大厅的问讯处。贡德拉赫女士请到C到达大厅的问讯处。"
+  },
+  "2_1": {
+    "german": "Liebe Fahrgäste, herzlich willkommen an Bord des ICE 987 nach Frankfurt. Eine wichtige Information: Am nächsten Bahnhof müssen wir kurz anhalten. Es gibt Probleme mit dem Bordcomputer. Bitte steigen Sie nicht aus! Wir fahren gleich weiter.",
+    "chinese": "亲爱的乘客们，欢迎乘坐ICE 987次列车前往法兰克福。一个重要信息：我们必须在下一站短暂停留。车载电脑出现问题。请不要下车！我们马上继续前行。"
+  },
+  "2_2": {
+    "german": "Achtung! Eine Durchsage für die Gäste des Flugs LH 487 nach Rom. Bitte kommen Sie zu Ausgang B 18 im ersten Stock. Der Ausgang A 7 im zweiten Stock ist zurzeit besetzt. Ich wiederhole: Passagiere nach Rom bitte Ausgang B 18.",
+    "chinese": "注意！给LH 487次航班前往罗马的乘客的通知。请到一楼的B 18号出口。二楼的A 7号出口目前被占用。我重复：前往罗马的乘客请到B 18号出口。"
+  },
+  "2_3": {
+    "german": "Liebe Urlauber! Wir machen jetzt eine Pause von einer Stunde. Sie können einen Kaffee trinken oder das kleine Museum direkt am Meer besuchen. Aber bitte: Um 14 Uhr fahren wir weiter. Bitte, kommen Sie pünktlich zum Bus. Wir möchten nicht warten.",
+    "chinese": "亲爱的游客们！我们现在休息一小时。您可以喝杯咖啡或参观海边的小博物馆。但请注意：我们2点继续前行。请准时回到巴士。我们不想等待。"
+  },
+  "2_4": {
+    "german": "Liebe Kunden! Das waren unsere Sonderangebote für heute. Und nun noch eine dringende Ansage: Der kleine Mario sucht seinen Vater. Kommen Sie bitte schnell zum Informationsschalter im 1. Stock. Mario wartet dort auf Sie.",
+    "chinese": "亲爱的顾客！这些是我们今天的特价商品。现在还有一个紧急通知：小马里奥在找他的父亲。请快速到一楼的问讯处。马里奥在那里等您。"
+  },
+  "3_1": {
+    "german": "Autohaus Mayer. Guten Tag, Frau Krause. Wir haben noch eine Frage zu der Reparatur von Ihrem Wagen. Bitte rufen Sie uns nach 13 Uhr wieder zurück. Heute sind wir bis 19 Uhr hier. Nein, Entschuldigung, heute ist ja schon Freitag. Dann heute nur bis 18 Uhr. Danke!",
+    "chinese": "迈尔汽车行。您好，克劳泽女士。关于您汽车的维修我们还有一个问题。请您下午1点后再打电话给我们。我们今天营业到晚上7点。不，抱歉，今天已经是星期五了。那今天只到下午6点。谢谢！"
+  },
+  "3_2": {
+    "german": "Hallo Irene, hier Nina. Ich möchte heute Abend nicht zu Hause bleiben. Im Metropolis gibt es einen guten Film. Kommst du mit oder musst du lernen? Ruf mich bitte auf dem Handy an.",
+    "chinese": "你好伊蕾娜，我是妮娜。我今晚不想待在家里。大都会影院有一部好电影。你要一起去吗，还是你得学习？请打我手机。"
+  },
+  "3_3": {
+    "german": "Sarah, ich bin's, Christoph. Du, ist mein Wörterbuch vielleicht bei dir? Auf dem kleinen Schrank mit den CDs? Bitte bring es gleich in den Kurs mit. Und ich gebe dir heute natürlich dein Buch zurück! Bis dann!",
+    "chinese": "莎拉，是我，克里斯托夫。我的词典是不是在你那里？在放CD的小柜子上？请马上带到课上来。我今天当然会把你的书还给你！一会儿见！"
+  },
+  "3_4": {
+    "german": "Hallo Sabine! Maria hier. War total schön im Café gestern, danke noch mal! Ich gehe gleich mit Julia ins Konzert und danach so um elf in die Disco Aladin. Wir treffen dich dort, okay?",
+    "chinese": "你好萨宾娜！我是玛丽亚。昨天在咖啡馆很开心，再次感谢！我马上和朱莉娅去音乐会，之后11点左右去阿拉丁迪厅。我们在那里见你，好吗？"
+  },
+  "3_5": {
+    "german": "Guten Tag, Frau Solms, Heinze hier. Morgen habe ich bis 12 Uhr einen Termin. Aber nach der Mittagspause habe ich Zeit. Wollen wir uns um 13 Uhr treffen? Rufen Sie mich bitte bis 18 Uhr zurück.",
+    "chinese": "您好，索尔姆斯女士，我是海因策。明天我12点前有个约会。但午休后我有时间。我们1点见面好吗？请在下午6点前给我回电话。"
+  }
+}

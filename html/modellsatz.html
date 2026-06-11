@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Deutsch 1 - Modellsatz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+        h1 { color: #667eea; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 1.1em; }
+        .score-board { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; text-align: center; }
+        .score-board h3 { margin: 0 0 10px 0; font-size: 1.3em; }
+        .score-board .score { font-size: 2em; font-weight: bold; }
+        .nav-tabs { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 24px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 1em; font-weight: 600; transition: all 0.3s; color: #4a5568; }
+        .nav-tab:hover { border-color: #667eea; color: #667eea; transform: translateY(-2px); }
+        .nav-tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: #667eea; }
+        .teil-section { display: none; }
+        .teil-section.active { display: block; animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .task { background: #f7fafc; padding: 25px; margin-bottom: 25px; border-radius: 12px; border-left: 5px solid #667eea; }
+        .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .task-title { font-size: 1.3em; font-weight: 700; color: #2d3748; }
+        .task-question { font-size: 1.1em; color: #4a5568; margin-bottom: 15px; font-weight: 600; }
+        .options { margin: 15px 0; }
+        .option { padding: 12px 20px; background: white; border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; position: relative; }
+        .option:hover { border-color: #667eea; background: #edf2f7; }
+        .option.selected { border-color: #667eea; background: #e6f2ff; }
+        .option.correct { border-color: #48bb78; background: #c6f6d5; }
+        .option.incorrect { border-color: #f56565; background: #fed7d7; }
+        .option.correct::after { content: '✓'; position: absolute; right: 20px; color: #48bb78; font-weight: bold; font-size: 1.5em; }
+        .option.incorrect::after { content: '✗'; position: absolute; right: 20px; color: #f56565; font-weight: bold; font-size: 1.5em; }
+        .submit-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: 600; margin-top: 15px; transition: all 0.3s; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .result-message { margin-top: 15px; padding: 15px; border-radius: 8px; font-weight: 600; display: none; }
+        .result-message.correct { background: #c6f6d5; color: #22543d; border: 2px solid #48bb78; display: block; }
+        .result-message.incorrect { background: #fed7d7; color: #742a2a; border: 2px solid #f56565; display: block; }
+        .transcript { background: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 2px solid #e2e8f0; }
+        .transcript-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .transcript-label { font-weight: 700; color: #667eea; font-size: 1.1em; }
+        .german-text { font-size: 1.05em; line-height: 1.8; color: #2d3748; margin-bottom: 15px; white-space: pre-wrap; }
+        .chinese-text { font-size: 1.05em; line-height: 1.8; color: #666; margin-top: 10px; padding-top: 15px; border-top: 2px dashed #e2e8f0; white-space: pre-wrap; display: none; }
+        .chinese-text.show { display: block; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: 600; transition: all 0.3s; margin-right: 10px; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .btn-secondary { background: white; color: #667eea; border: 2px solid #667eea; }
+        .btn-secondary:hover { background: #667eea; color: white; }
+        .back-btn { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: #4a5568; font-weight: 600; transition: all 0.3s; }
+        .back-btn:hover { border-color: #667eea; color: #667eea; transform: translateX(-5px); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="exam-sets.html" class="back-btn">← 返回题库列表</a>
+        <h1>🎧 Start Deutsch 1 - Modellsatz</h1>
+        <div class="subtitle">模拟试卷</div>
+
+        <div class="score-board">
+            <h3>📊 答题统计</h3>
+            <div class="score">
+                <span class="score-value">0 / 0</span>
+                <span class="score-percentage">(0%)</span>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTeil('teil1')">Teil 1 (对话)</button>
+            <button class="nav-tab" onclick="showTeil('teil2')">Teil 2 (通知)</button>
+            <button class="nav-tab" onclick="showTeil('teil3')">Teil 3 (电话留言)</button>
+        </div>
+
+        <div id="teil1" class="teil-section active"></div>
+        <div id="teil2" class="teil-section"></div>
+        <div id="teil3" class="teil-section"></div>
+    </div>
+
+    <script src="../js/quiz-common.js"></script>
+    <script>
+        const DATA_FILE = '../data/transcripts_with_translation.json';
+        const AUDIO_PREFIX = '../archive_audio/sd1_modellsatz.mp4';
+
+        // 页面加载时执行
+        loadData();
+        loadAnswers();
+    </script>
+</body>
+</html>
