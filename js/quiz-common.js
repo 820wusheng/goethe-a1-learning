@@ -215,6 +215,11 @@ function renderTeil1(data) {
         const isExample = q.id.startsWith('bsp');
         const taskNum = isExample ? '示例' : `题目 ${index}`;
 
+        // 音频文件路径
+        const audioFile = q.id.startsWith('bsp') ?
+            `../audio/audio_${q.id}.mp4` :
+            `../audio/audio_${q.id}.mp4`;
+
         html += `
             <div class="task" id="task-${q.id}">
                 <div class="task-header">
@@ -223,9 +228,9 @@ function renderTeil1(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
+                        <audio controls style="max-width: 300px;">
+                            <source src="${audioFile}" type="audio/mp4">
+                        </audio>
                     </div>
                 </div>
 
@@ -270,6 +275,8 @@ function renderTeil2(data) {
         const isExample = q.id.startsWith('bsp');
         const taskNum = isExample ? '示例' : `题目 ${index + 6}`;
 
+        const audioFile = `../audio/audio_${q.id}.mp4`;
+
         html += `
             <div class="task" id="task-${q.id}">
                 <div class="task-header">
@@ -278,9 +285,9 @@ function renderTeil2(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
+                        <audio controls style="max-width: 300px;">
+                            <source src="${audioFile}" type="audio/mp4">
+                        </audio>
                     </div>
                 </div>
 
@@ -319,6 +326,8 @@ function renderTeil3(data) {
         const taskData = data[q.id];
         if (!taskData) return;
 
+        const audioFile = `../audio/audio${q.id}.mp4`;
+
         html += `
             <div class="task" id="task-${q.id}">
                 <div class="task-header">
@@ -327,9 +336,9 @@ function renderTeil3(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
+                        <audio controls style="max-width: 300px;">
+                            <source src="${audioFile}" type="audio/mp4">
+                        </audio>
                     </div>
                 </div>
 
