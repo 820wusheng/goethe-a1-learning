@@ -6,5 +6,3 @@ __pycache__/
 *.pyc
 
 # Archive音频文件（太大，请从官网下载）
-archive_audio/*.mp4
-archive_pdfs/*.pdf
