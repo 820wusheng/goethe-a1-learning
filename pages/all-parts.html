@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe-Zertifikat A1 - Hören (完整版)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 15px 30px;
+            background: white;
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: all 0.3s;
+            color: #4a5568;
+        }
+
+        .nav-tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .part-section {
+            display: none;
+        }
+
+        .part-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .part-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .part-header h2 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .part-header .description {
+            color: #718096;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+        }
+
+        .task-card.example {
+            border-left-color: #48bb78;
+            background: linear-gradient(135deg, #f0fff4 0%, #f0fdf4 100%);
+        }
+
+        .task-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+        }
+
+        .task-card.example .task-number {
+            background: #48bb78;
+        }
+
+        .task-context {
+            background: #fff7ed;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+            font-size: 1.05em;
+        }
+
+        .task-question {
+            font-size: 1.4em;
+            color: #2d3748;
+            font-weight: 700;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        .audio-section {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .audio-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .audio-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audio-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .audio-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .audio-btn.secondary {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .audio-btn.secondary:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .audio-btn.tertiary {
+            background: #06b6d4;
+            color: white;
+        }
+
+        .audio-btn.tertiary:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        .show-transcript-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .show-transcript-btn:hover {
+            background: #059669;
+            transform: scale(1.02);
+        }
+
+        .transcript {
+            display: none;
+            background: #edf2f7;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .transcript.visible {
+            display: block;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 1000px; }
+        }
+
+        .transcript-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.15em;
+        }
+
+        .transcript-text {
+            color: #4a5568;
+            line-height: 2;
+            font-size: 1.1em;
+        }
+
+        .transcript-text strong {
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+            transform: translateX(8px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 1.15em;
+            color: #2d3748;
+            flex: 1;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #fbbf24;
+            color: #78350f;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 0.95em;
+            font-weight: 700;
+            margin-left: 12px;
+        }
+
+        .note-box {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: #1e40af;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .task-question {
+                font-size: 1.2em;
+            }
+
+            .audio-controls {
+                flex-direction: column;
+            }
+
+            .audio-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎧 Goethe-Zertifikat A1 - Hören</h1>
+            <p>德语A1听力考试完整版练习 • 包含所有原版音频链接</p>
+        </header>
+
+        <div class="note-box">
+            <strong>📌 使用说明：</strong><br>
+            • 点击 <strong>🔊 AI朗读</strong> 按钮使用浏览器语音合成朗读德语<br>
+            • 点击 <strong>🌐 官方音频</strong> 在新窗口打开歌德学院原版音频<br>
+            • 点击 <strong>📝 显示听力原文</strong> 查看参考文本（根据题目推测编写，仅供参考）<br>
+            • 所有音频均来自歌德学院官方网站
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showPart(1)">Teil 1 (任务 0-6)</button>
+            <button class="nav-tab" onclick="showPart(2)">Teil 2 (任务 7-10)</button>
+            <button class="nav-tab" onclick="showPart(3)">Teil 3 (任务 11-15)</button>
+        </div>
+
+        <!-- Teil 1 -->
+        <div id="part1" class="part-section active">
+            <div class="part-header">
+                <h2>Teil 1</h2>
+                <div class="description">
+                    您将听到6个短对话，每个对话听两遍。请选择正确答案。<br>
+                    <span class="info-badge">每题播放2次</span>
+                </div>
+            </div>
+
+            <!-- Beispiel 0 -->
+            <div class="task-card example">
+                <span class="task-number">Beispiel 0</span>
+                <div class="task-question">Welche Zimmernummer hat Herr Schneider?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('bsp1')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio_bsp1.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('bsp1')">
+                    📝 显示听力原文
+                </button>
+                <div id="transcript-bsp1" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Guten Tag. Mein Name ist Schneider. Ich habe ein Zimmer reserviert.<br>
+                        <strong>Mann:</strong> Ah ja, Herr Schneider. Sie haben Zimmer 245.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q0" id="q0a" value="a">
+                        <label for="q0a">a) Zimmer 2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q0" id="q0b" value="b">
+                        <label for="q0b">b) Zimmer 245 ✓</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q0" id="q0c" value="c">
+                        <label for="q0c">c) Zimmer 254</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 1 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 1</span>
+                <div class="task-question">Was kostet der Pullover?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_1')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_1.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_1')">📝 显示听力原文</button>
+                <div id="transcript-1_1" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Entschuldigung, was kostet der Pullover hier?<br>
+                        <strong>Mann:</strong> Der kostet neunzehn Euro fünfundneunzig.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1a" value="a">
+                        <label for="q1a">a) Dreißig Euro</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1b" value="b">
+                        <label for="q1b">b) Fünfundneunzig Euro</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1c" value="c">
+                        <label for="q1c">c) Neunzehn Euro fünfundneunzig Cent</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 2 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 2</span>
+                <div class="task-question">Wie spät ist es?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_2')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_2.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_2')">📝 显示听力原文</button>
+                <div id="transcript-1_2" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann:</strong> Entschuldigung, wie spät ist es bitte?<br>
+                        <strong>Frau:</strong> Es ist gleich fünf Uhr.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2a" value="a">
+                        <label for="q2a">a) 15 Uhr</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2b" value="b">
+                        <label for="q2b">b) Gleich 5 Uhr</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2c" value="c">
+                        <label for="q2c">c) Halb 5 Uhr</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 3 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 3</span>
+                <div class="task-question">Was isst die Frau im Restaurant?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_3')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_3.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_3')">📝 显示听力原文</button>
+                <div id="transcript-1_3" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann:</strong> Was möchten Sie essen?<br>
+                        <strong>Frau:</strong> Ich nehme den Fisch mit Pommes, bitte.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3a" value="a">
+                        <label for="q3a">a) Pommes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3b" value="b">
+                        <label for="q3b">b) Fisch</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3c" value="c">
+                        <label for="q3c">c) Wurst</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 4 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 4</span>
+                <div class="task-question">In welche Klasse geht Frau Hegers Sohn?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_4')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_4.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_4')">📝 显示听力原文</button>
+                <div id="transcript-1_4" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann:</strong> Frau Heger, in welche Klasse geht Ihr Sohn denn jetzt?<br>
+                        <strong>Frau:</strong> Er geht jetzt in die vierte Klasse.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4a" value="a">
+                        <label for="q4a">a) In die neunte Klasse</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4b" value="b">
+                        <label for="q4b">b) In die dritte Klasse</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4c" value="c">
+                        <label for="q4c">c) In die vierte Klasse</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 5 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 5</span>
+                <div class="task-question">Wie kommt die Frau in den 2. Stock?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_5')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_5.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_5')">📝 显示听力原文</button>
+                <div id="transcript-1_5" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Entschuldigung, wie komme ich in den zweiten Stock?<br>
+                        <strong>Mann:</strong> Da nehmen Sie am besten den Aufzug dort drüben.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5a" value="a">
+                        <label for="q5a">a) Mit dem Aufzug</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5b" value="b">
+                        <label for="q5b">b) Auf der Treppe um die Ecke</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5c" value="c">
+                        <label for="q5c">c) Mit der Rolltreppe</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 6 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 6</span>
+                <div class="task-question">Wohin fährt Herr Albers?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('1_6')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio1_6.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('1_6')">📝 显示听力原文</button>
+                <div id="transcript-1_6" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Herr Albers, Sie fahren heute nach Hamburg, oder?<br>
+                        <strong>Mann:</strong> Ja, ich muss zur Arbeit.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6a" value="a">
+                        <label for="q6a">a) In Urlaub ans Meer</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6b" value="b">
+                        <label for="q6b">b) Zur Arbeit</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6c" value="c">
+                        <label for="q6c">c) Zur Familie</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teil 2 -->
+        <div id="part2" class="part-section">
+            <div class="part-header">
+                <h2>Teil 2</h2>
+                <div class="description">
+                    您将听到4个公告，每个公告听一遍。判断对错（Richtig oder Falsch）。<br>
+                    <span class="info-badge">每题播放1次</span>
+                </div>
+            </div>
+
+            <!-- Beispiel 0 -->
+            <div class="task-card example">
+                <span class="task-number">Beispiel 0</span>
+                <div class="task-context">
+                    📍 Du bist am Flughafen und bekommst diese Information:
+                </div>
+                <div class="task-question">Die Reisende soll zur Information in Halle C kommen.</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('bsp2')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio_bsp2.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('bsp2')">📝 显示听力原文</button>
+                <div id="transcript-bsp2" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        Achtung bitte! Die Reisende Anna Müller wird gebeten, zur Information in Halle C zu kommen.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7a" value="richtig">
+                        <label for="q7a">Richtig ✓</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7b" value="falsch">
+                        <label for="q7b">Falsch</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 7 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 7</span>
+                <div class="task-context">
+                    🏬 Du bist im Kaufhaus und bekommst diese Information:
+                </div>
+                <div class="task-question">Die Kunden sollen die Weihnachtsfeier besuchen.</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('2_1')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio2_1.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('2_1')">📝 显示听力原文</button>
+                <div id="transcript-2_1" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        Liebe Kundinnen und Kunden, wir laden Sie herzlich zu unserer Weihnachtsfeier am 20. Dezember ein. Wir freuen uns auf Ihren Besuch!
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8a" value="richtig">
+                        <label for="q8a">Richtig</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8b" value="falsch">
+                        <label for="q8b">Falsch</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 8 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 8</span>
+                <div class="task-context">
+                    🚌 Du fährst in einem Reisebus und bekommst diese Information:
+                </div>
+                <div class="task-question">Die Fahrgäste sollen sich im Restaurant treffen.</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('2_2')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio2_2.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('2_2')">📝 显示听力原文</button>
+                <div id="transcript-2_2" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        Liebe Fahrgäste, in Kürze erreichen wir den Hauptbahnhof. Bitte treffen Sie sich am Gleis 7.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9a" value="richtig">
+                        <label for="q9a">Richtig</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9b" value="falsch">
+                        <label for="q9b">Falsch</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 9 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 9</span>
+                <div class="task-context">
+                    🚂 Du bist im Zug und bekommst diese Information:
+                </div>
+                <div class="task-question">Die Fahrgäste sollen im Zug bleiben.</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('2_3')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio2_3.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('2_3')">📝 显示听力原文</button>
+                <div id="transcript-2_3" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        Achtung, liebe Fahrgäste! Wir haben eine kurze Verspätung. Bitte bleiben Sie im Zug sitzen.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10a" value="richtig">
+                        <label for="q10a">Richtig</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10b" value="falsch">
+                        <label for="q10b">Falsch</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 10 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 10</span>
+                <div class="task-context">
+                    ✈️ Du bist am Flughafen und bekommst diese Information:
+                </div>
+                <div class="task-question">Der Herr soll sofort zum Schalter kommen.</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('2_4')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio2_4.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('2_4')">📝 显示听力原文</button>
+                <div id="transcript-2_4" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        Herr Schmidt wird gebeten, sofort zu Schalter 3 zu kommen. Herr Schmidt bitte zu Schalter 3.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11a" value="richtig">
+                        <label for="q11a">Richtig</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11b" value="falsch">
+                        <label for="q11b">Falsch</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teil 3 -->
+        <div id="part3" class="part-section">
+            <div class="part-header">
+                <h2>Teil 3</h2>
+                <div class="description">
+                    您将听到5个对话，每个对话听两遍。请选择正确答案。<br>
+                    <span class="info-badge">每题播放2次</span>
+                </div>
+            </div>
+
+            <!-- Aufgabe 11 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 11</span>
+                <div class="task-question">Die Nummer ist:</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('3_1')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio3_1.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('3_1')">📝 显示听力原文</button>
+                <div id="transcript-3_1" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann:</strong> Können Sie mir bitte die Telefonnummer geben?<br>
+                        <strong>Frau:</strong> Ja, die Nummer ist eins eins acht acht drei.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12a" value="a">
+                        <label for="q12a">a) 11833</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12b" value="b">
+                        <label for="q12b">b) 11883</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12c" value="c">
+                        <label for="q12c">c) 12833</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 12 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 12</span>
+                <div class="task-question">Wo genau treffen sich die Männer?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('3_2')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio3_2.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('3_2')">📝 显示听力原文</button>
+                <div id="transcript-3_2" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann 1:</strong> Wo treffen wir uns denn?<br>
+                        <strong>Mann 2:</strong> Lass uns an der Information am Bahnhof treffen.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13a" value="a">
+                        <label for="q13a">a) Am Zug</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13b" value="b">
+                        <label for="q13b">b) Am Bahnhof</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13c" value="c">
+                        <label for="q13c">c) An der Information</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 13 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 13</span>
+                <div class="task-question">Wie lange will der Mann noch warten?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('3_3')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio3_3.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('3_3')">📝 显示听力原文</button>
+                <div id="transcript-3_3" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Wie lange wartest du noch?<br>
+                        <strong>Mann:</strong> Ich warte noch zehn Minuten, dann gehe ich.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14a" value="a">
+                        <label for="q14a">a) 20 Minuten</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14b" value="b">
+                        <label for="q14b">b) 2 Minuten</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14c" value="c">
+                        <label for="q14c">c) 10 Minuten</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 14 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 14</span>
+                <div class="task-question">An welchem Tag will die Frau kommen?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('3_4')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio3_4.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('3_4')">📝 显示听力原文</button>
+                <div id="transcript-3_4" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Mann:</strong> Wann können Sie denn kommen?<br>
+                        <strong>Frau:</strong> Ich kann am Samstag kommen, ist das okay?
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15a" value="a">
+                        <label for="q15a">a) Am Montag</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15b" value="b">
+                        <label for="q15b">b) Am Sonntag</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15c" value="c">
+                        <label for="q15c">c) Am Samstag</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufgabe 15 -->
+            <div class="task-card">
+                <span class="task-number">Aufgabe 15</span>
+                <div class="task-question">Was ist kaputt?</div>
+
+                <div class="audio-section">
+                    <div class="audio-title">🎵 音频资源：</div>
+                    <div class="audio-controls">
+                        <button class="audio-btn primary" onclick="speakText('3_5')">
+                            🔊 AI朗读
+                        </button>
+                        <a href="https://bfu.goethe.de/a1_sd1/medien/a1/audio3_5.mp4" target="_blank" class="audio-btn secondary">
+                            🌐 官方音频
+                        </a>
+                    </div>
+                </div>
+
+                <button class="show-transcript-btn" onclick="toggleTranscript('3_5')">📝 显示听力原文</button>
+                <div id="transcript-3_5" class="transcript">
+                    <div class="transcript-title">🎯 听力原文 (参考):</div>
+                    <div class="transcript-text">
+                        <strong>Frau:</strong> Was ist denn los?<br>
+                        <strong>Mann:</strong> Mein Computer ist kaputt. Ich kann nicht mehr arbeiten.
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q16" id="q16a" value="a">
+                        <label for="q16a">a) Der Fernseher</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" id="q16b" value="b">
+                        <label for="q16b">b) Der Computer</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" id="q16c" value="c">
+                        <label for="q16c">c) Das Handy</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 显示指定部分
+        function showPart(partNum) {
+            // 隐藏所有部分
+            document.querySelectorAll('.part-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 移除所有按钮的active状态
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的部分
+            document.getElementById(`part${partNum}`).classList.add('active');
+
+            // 激活对应按钮
+            event.target.classList.add('active');
+
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 切换听力原文显示
+        function toggleTranscript(taskId) {
+            const transcript = document.getElementById(`transcript-${taskId}`);
+            transcript.classList.toggle('visible');
+
+            const btn = event.target;
+            if (transcript.classList.contains('visible')) {
+                btn.textContent = '🔼 隐藏听力原文';
+            } else {
+                btn.textContent = '📝 显示听力原文';
+            }
+        }
+    </script>
+
+    <script>
+        // 听力原文数据
+        const audioTexts = {
+            'bsp1': 'Eine Frau sagt: Guten Tag. Mein Name ist Schneider. Ich habe ein Zimmer reserviert.
+Ein Mann antwortet: Ah ja, Herr Schneider. Sie haben Zimmer zweihundertfünfundvierzig.',
+            '1_1': 'Eine Frau fragt: Entschuldigung, was kostet der Pullover hier?
+Ein Mann antwortet: Der kostet neunzehn Euro fünfundneunzig.',
+            '1_2': 'Ein Mann fragt: Entschuldigung, wie spät ist es bitte?
+Eine Frau antwortet: Es ist gleich fünf Uhr.',
+            '1_3': 'Ein Mann fragt: Was möchten Sie essen?
+Eine Frau antwortet: Ich nehme den Fisch mit Pommes, bitte.',
+            '1_4': 'Ein Mann fragt: Frau Heger, in welche Klasse geht Ihr Sohn denn jetzt?
+Eine Frau antwortet: Er geht jetzt in die vierte Klasse.',
+            '1_5': 'Eine Frau fragt: Entschuldigung, wie komme ich in den zweiten Stock?
+Ein Mann antwortet: Da nehmen Sie am besten den Aufzug dort drüben.',
+            '1_6': 'Eine Frau fragt: Herr Albers, Sie fahren heute nach Hamburg, oder?
+Ein Mann antwortet: Ja, ich muss zur Arbeit.',
+            'bsp2': 'Achtung bitte! Die Reisende Anna Müller wird gebeten, zur Information in Halle C zu kommen.',
+            '2_1': 'Liebe Kundinnen und Kunden, wir laden Sie herzlich zu unserer Weihnachtsfeier am zwanzigsten Dezember ein. Wir freuen uns auf Ihren Besuch!',
+            '2_2': 'Liebe Fahrgäste, in Kürze erreichen wir den Hauptbahnhof. Bitte treffen Sie sich am Gleis sieben.',
+            '2_3': 'Achtung, liebe Fahrgäste! Wir haben eine kurze Verspätung. Bitte bleiben Sie im Zug sitzen.',
+            '2_4': 'Herr Schmidt wird gebeten, sofort zu Schalter drei zu kommen. Herr Schmidt bitte zu Schalter drei.',
+            '3_1': 'Ein Mann fragt: Können Sie mir bitte die Telefonnummer geben?
+Eine Frau antwortet: Ja, die Nummer ist eins eins acht acht drei.',
+            '3_2': 'Ein Mann fragt: Wo treffen wir uns denn?
+Ein anderer Mann antwortet: Lass uns an der Information am Bahnhof treffen.',
+            '3_3': 'Eine Frau fragt: Wie lange wartest du noch?
+Ein Mann antwortet: Ich warte noch zehn Minuten, dann gehe ich.',
+            '3_4': 'Ein Mann fragt: Wann können Sie denn kommen?
+Eine Frau antwortet: Ich kann am Samstag kommen, ist das okay?',
+            '3_5': 'Eine Frau fragt: Was ist denn los?
+Ein Mann antwortet: Mein Computer ist kaputt. Ich kann nicht mehr arbeiten.'
+        };
+
+        // AI朗读功能
+        function speakText(taskId) {
+            if (!('speechSynthesis' in window)) {
+                alert('您的浏览器不支持语音合成功能');
+                return;
+            }
+
+            const text = audioTexts[taskId];
+            if (!text) {
+                alert('未找到该题目的文本');
+                return;
+            }
+
+            // 停止之前的播放
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.85;
+            utterance.pitch = 1.0;
+
+            utterance.onstart = () => {
+                const btn = event.target;
+                btn.textContent = '⏸ 播放中...';
+                btn.disabled = true;
+            };
+
+            utterance.onend = () => {
+                const btn = event.target;
+                btn.textContent = '🔊 AI朗读';
+                btn.disabled = false;
+            };
+
+            utterance.onerror = () => {
+                const btn = event.target;
+                btn.textContent = '🔊 AI朗读';
+                btn.disabled = false;
+                alert('播放失败，请重试');
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+
+</body>
+</html>

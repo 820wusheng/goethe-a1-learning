@@ -1,0 +1,70 @@
+{
+  "bsp1": {
+    "task": "Beispiel 1",
+    "text": "Ach, Verzeihung. Wo finde ich ein Schneider vom Betriebsrat? Schneider warten\nsie mal. Ich glaube, der ist in Zimmernummer 250. Ja, stimmt, Zimmer 250. Das ist im\nzweiten Stock. Da können Sie den Aufzug nehmen.\nZweiter Stock, Zimmer 250. Okay, vielen Dank."
+  },
+  "1_1": {
+    "task": "Aufgabe 1",
+    "text": "Entschuldigung, was kostet dieser Polover jetzt?\nEr steht 30 Prozent billiger.\nEin Moment bitte.\n1995.\n1995 Euro.\nJa, Euro natürlich.\nOkay, den nehme ich."
+  },
+  "1_2": {
+    "task": "Aufgabe 2",
+    "text": "Entschuldigen Sie bitte.\nEr bitte.\nHaben Sie eine Uhr.\nWie spät ist das bitte?\nJa.\nJetzt ist es gleich fünf Uhr.\nWas?\nSchon fünf?\nVielen Dank. Wiedersehen."
+  },
+  "1_3": {
+    "task": "Aufgabe 3",
+    "text": "Was wünschen Sie bitte? Ich hätte gern die Salatplatte und ein Entschuldigung.\nDie Salatplatte ist leider aus, aber die Bratwurst kann ich Ihnen empfehlen. Ganz frisch heute.\nNein, danke. Ich esse kein Fleisch. Gibt es etwas ohne Fleisch?\nJa, nicht mehr viel. Fisch oder Pommes? Fisch.\nJa, dann will ich Pommes."
+  },
+  "1_4": {
+    "task": "Aufgabe 4",
+    "text": "Haben Sie Kinder, Frau Heger?\nJa, einen Sohn.\nUnd wie alt ist der?\n9 Jahre, seit gestern.\nAch, da geht der ja schon zur Schule.\nJa, klar, schon in die dritte Klasse."
+  },
+  "1_5": {
+    "task": "Aufgabe 5",
+    "text": "Entschuldigen Sie, wie komme ich denn hier in zweiten Stock? Die Rolltreppe davon ist kaputt.\nDa gehen Sie hier rechts um die Ecke und nehmen den Aufzug.\nUm die Ecke rechts.\nAh, danke."
+  },
+  "1_6": {
+    "task": "Aufgabe 6",
+    "text": "Guten Morgen Herr Albers. So frühe schon bei der Arbeit.\nJa, ich habe noch viel zu tun. Morgen fahre ich doch für drei Wochen weg.\nAch ja, das habe ich vergessen.\nWohin fahren Sie denn?\nZu meinen Verwandten, nach Polen.\nNa dann, schöne Zeit."
+  },
+  "bsp2": {
+    "task": "Beispiel 2",
+    "text": "Frau Kathrin Gundlach, angekommen aus Budapest, wird zum Informationsschalter in der Ankunftzalle C gebeten.\nFrau Gundlach, bitte zum Informationsschalter in der Ankunftzalle C."
+  },
+  "2_1": {
+    "task": "Aufgabe 7",
+    "text": "Liebe Kunden, zu Weihnachten beaken wir Ihnen super Preise an.\nZum Beispiel erst klassiker italienischer Weißwein für 12,28 Euro die Flasche oder\nexklusiver Argentinischer Rotwein für 9,68 Euro.\nBesuchen Sie uns im dritten Stock, vorbe Weihnachten."
+  },
+  "2_2": {
+    "task": "Aufgabe 8",
+    "text": "Liebe Fahrgäste, wir sind kurz vor Würzburg, sicherlich haben Sie schon Hunger.\nAn der nächsten Raststätte halten wir für eine Stunde.\nWir treffen uns wieder um halb eins am Bus, aber bitte pünktlich sein."
+  },
+  "2_3": {
+    "task": "Aufgabe 9",
+    "text": "Liebe Fahrgäste, bitte beachten Sie, das ist ein außerplanmäßiger Halt.\nBitte hier nicht aussteigen.\nIn ein paar Minuten erreichen wir den Bahnhof von Bad Rhodesberg."
+  },
+  "2_4": {
+    "task": "Aufgabe 10",
+    "text": "Herr Stefan Jander, gebucht auf dem Flug LH737 nach Warschau, wird zum Schalter F7 gebeten.\nDer Flug wird in ein paar Minuten geschlossen. Herr Jander, gebucht nach Warschau bitte nach F7."
+  },
+  "3_1": {
+    "task": "Aufgabe 11",
+    "text": "Telefonansagerdienst der deutschen Telekom. Die Rufnummer des Teilnehmers hat sich geändert.\nBitte rufen Sie die Telefonauskunft an unter 11,8,3,3."
+  },
+  "3_2": {
+    "task": "Aufgabe 12",
+    "text": "Hallo Jan, hier ist Boris.\nDurch bin ich noch im Zug.\nDu holst mich doch vom Bahnhof ab.\nIch warte an der Information auf dich."
+  },
+  "3_3": {
+    "task": "Aufgabe 13",
+    "text": "Mensch, Jan, du Penner, hier nochmal Boris, ich bin jetzt am Bahnhof und du, wo bist du denn?\nIch warte schon über 20 Minuten auf dich. Also 10 Minuten Zeit hast du noch, bis zwei, dann nehme ich einen Taxi."
+  },
+  "3_4": {
+    "task": "Aufgabe 14",
+    "text": "Guten Tag hier, Rogala. Wir können am Samstag leider nicht zu Ihnen kommen. Am Sonntag haben wir aber Zeit.\nRufen Sie uns doch bitte zurück, ob Ihnen das passt. Danke."
+  },
+  "3_5": {
+    "task": "Aufgabe 15",
+    "text": "Hallo Alex, Walter hier. Kannst du schnell mal rüberkommen?\nMein Computer hat einen Fehler. Ich kann nichts drucken.\nMelde dich doch bitte gleich, wenn du nach Hause kommst."
+  }
+}

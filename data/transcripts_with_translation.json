@@ -1,0 +1,87 @@
+{
+  "bsp1": {
+    "task": "示例 1",
+    "german": "Frau: Ach, Verzeihung, wo finde ich Herrn Schneider vom Betriebsrat?\nMann: Schneider. Warten Sie mal. Ich glaube, der ist in Zimmer Nummer 254. Ja, stimmt, Zimmer 254. Das ist im zweiten Stock. Da können Sie den Aufzug hier nehmen.\nFrau: Zweiter Stock, Zimmer 254. Okay, vielen Dank.",
+    "chinese": "女士：哦，不好意思，我在哪里可以找到劳资委员会的施奈德先生？\n男士：施奈德。等一下。我想他在254号房间。是的，没错，254号房间。在二楼。您可以在这里乘电梯。\n女士：二楼，254号房间。好的，非常感谢。"
+  },
+  "1_1": {
+    "task": "题目 1",
+    "german": "Kunde: Entschuldigung, was kostet dieser Pullover jetzt? Da steht 30 Prozent billiger.\nVerkäuferin: Einen Moment bitte... neunzehnfünfundneunzig.\nKunde: 19,95 Euro?\nVerkäuferin: Ja, Euro natürlich.\nKunde: Hm, ... ok, den nehme ich.",
+    "chinese": "顾客：不好意思，这件毛衣现在多少钱？这里写着便宜30%。\n售货员：请稍等...19.95。\n顾客：19.95欧元？\n售货员：是的，当然是欧元。\n顾客：嗯...好的，我要了。"
+  },
+  "1_2": {
+    "task": "题目 2",
+    "german": "Passant: Ach, entschuldigen Sie bitte.\nPassantin: Ja bitte.\nPassant: Haben Sie eine Uhr? ... Wie spät ist es bitte?\nPassantin: Ja – jetzt ist es gleich 5 Uhr.\nPassant: Was, schon 5. Vielen Dank, Wiedersehen.",
+    "chinese": "路人：啊，不好意思打扰一下。\n路人女士：什么事？\n路人：您有手表吗？...请问现在几点了？\n路人女士：有的 - 现在快5点了。\n路人：什么，已经5点了。非常感谢，再见。"
+  },
+  "1_3": {
+    "task": "题目 3",
+    "german": "Kellner: Was wünschen Sie bitte?\nGast: Ich hätte gern die Salatplatte und ein ...\nKellner: Entschuldigung, die Salatplatte ist leider aus, aber die Bratwurst kann ich Ihnen empfehlen ... ganz frisch heute.\nGast: Nein danke ... ich esse kein Fleisch. Gibt es etwas ohne Fleisch?\nKellner: Ja ... nicht mehr viel: Fisch oder ... Pommes.\nGast: Fisch ... hm ... Tja, dann wohl die Pommes.",
+    "chinese": "服务员：您想要点什么？\n客人：我想要沙拉拼盘和一个...\n服务员：不好意思，沙拉拼盘已经售罄了，但我可以推荐烤香肠...今天很新鲜。\n客人：不用了谢谢...我不吃肉。有不含肉的吗？\n服务员：有的...但不多了：鱼或者...薯条。\n客人：鱼...嗯...那就来薯条吧。"
+  },
+  "1_4": {
+    "task": "题目 4",
+    "german": "Kollege: Haben Sie Kinder, Frau Heger?\nKollegin: Ja, einen Sohn.\nKollege: Und wie alt ist er?\nKollegin: Neun Jahre ... seit gestern.\nKollege: Ah, dann geht er ja schon zur Schule?\nKollegin: Ja klar, schon in die dritte Klasse.",
+    "chinese": "同事：您有孩子吗，黑格女士？\n同事女士：有的，一个儿子。\n同事：他多大了？\n同事女士：9岁...从昨天起。\n同事：啊，那他已经上学了吧？\n同事女士：是的当然，已经上三年级了。"
+  },
+  "1_5": {
+    "task": "题目 5",
+    "german": "Kundin: Ach, entschuldigen Sie, wie komme ich denn hier in den zweiten Stock?\nDie Rolltreppe da vorn ist kaputt.\nVerkäufer: Da gehen Sie hier rechts um die Ecke und nehmen den Aufzug.\nKundin: Um die Ecke rechts. Danke.",
+    "chinese": "顾客：啊，不好意思，我怎么去二楼？\n前面的自动扶梯坏了。\n售货员：您在这里右转拐角，然后乘电梯。\n顾客：拐角右转。谢谢。"
+  },
+  "1_6": {
+    "task": "题目 6",
+    "german": "Kollegin: Guten Morgen, Herr Albers. So früh schon bei der Arbeit?\nKollege: Ja, ich habe noch viel zu tun. Morgen fahre ich doch für 3 Wochen weg.\nKollegin: Ach ja, das hab' ich vergessen. Wohin fahren Sie denn?\nKollege: Zu meinen Verwandten nach Polen.\nKollegin: Na dann ... schöne Zeit.",
+    "chinese": "女同事：早上好，阿尔伯斯先生。这么早就来上班了？\n男同事：是的，我还有很多工作要做。明天我要离开三周。\n女同事：哦对了，我忘了。您要去哪里？\n男同事：去波兰看我的亲戚。\n女同事：那么...祝您玩得愉快。"
+  },
+  "bsp2": {
+    "task": "示例 2",
+    "german": "Frau Katrin Gundlach, angekommen aus Budapest, wird zum Informationsschalter in der Ankunftshalle C gebeten.\nFrau Gundlach bitte zum Informationsschalter in der Ankunftshalle C.",
+    "chinese": "从布达佩斯抵达的卡特琳·贡德拉赫女士，请到C到达大厅的问讯处。\n贡德拉赫女士，请到C到达大厅的问讯处。"
+  },
+  "2_1": {
+    "task": "题目 7",
+    "german": "Liebe Kunden, zu Weihnachten bieten wir Ihnen Superpreise an ... z. B. erstklassiger italienischer Weißwein für 12 Euro 78 die Flasche oder exklusiver argentinischer Rotwein für 9 Euro 68. Besuchen Sie uns im 3. Stock. Frohe Weihnachten.",
+    "chinese": "亲爱的顾客们，圣诞节我们为您提供超值优惠...例如，一级意大利白葡萄酒每瓶12.78欧元，或特选阿根廷红葡萄酒每瓶9.68欧元。请到三楼光顾我们。圣诞快乐。"
+  },
+  "2_2": {
+    "task": "题目 8",
+    "german": "Liebe Fahrgäste. Wir sind kurz vor Würzburg. Sicherlich haben Sie schon Hunger. An der nächsten Raststätte halten wir für eine Stunde. Wir treffen uns wieder um halb eins am Bus, aber bitte pünktlich sein.",
+    "chinese": "亲爱的乘客们。我们马上就到维尔茨堡了。您肯定已经饿了。我们会在下一个休息站停留一小时。我们12点半在大巴旁集合，请务必准时。"
+  },
+  "2_3": {
+    "task": "题目 9",
+    "german": "Liebe Fahrgäste! Bitte beachten Sie. Das ist ein außerplanmäßiger Halt. Bitte hier nicht aussteigen. In ein paar Minuten erreichen wir den Bahnhof Bonn – Bad Godesberg.",
+    "chinese": "亲爱的乘客们！请注意。这是临时停靠。请不要在这里下车。几分钟后我们将到达波恩-巴特戈德斯贝格火车站。"
+  },
+  "2_4": {
+    "task": "题目 10",
+    "german": "Herr Stefan Janda gebucht auf dem Flug LH 737 nach Warschau, wird zum Schalter F7 gebeten. Der Flug wird in ein paar Minuten geschlossen. Herr Janda gebucht nach Warschau bitte nach F7.",
+    "chinese": "预订了LH737航班飞往华沙的斯特凡·扬达先生，请到F7柜台。航班将在几分钟后关闭。预订飞往华沙的扬达先生，请到F7。"
+  },
+  "3_1": {
+    "task": "题目 11",
+    "german": "Telefonansagedienst der deutschen Telekom. Die Rufnummer des Teilnehmers hat sich geändert. Bitte rufen Sie die Telefonauskunft an unter 11833.",
+    "chinese": "德国电信电话语音服务。用户的电话号码已更改。请拨打电话查询服务11833。"
+  },
+  "3_2": {
+    "task": "题目 12",
+    "german": "Hallo Jan, hier ist Boris. Ich bin noch im Zug. Du holst mich doch vom Bahnhof ab. Ich warte an der Information auf dich.",
+    "chinese": "你好扬，我是鲍里斯。我还在火车上。你会来火车站接我吧。我在问讯处等你。"
+  },
+  "3_3": {
+    "task": "题目 13",
+    "german": "Mensch, Jan, hier nochmal Boris. Ich bin jetzt am Bahnhof und du, wo bist du denn? Ich warte schon über 20 Minuten auf dich. Also 10 Minuten Zeit hast du noch, bis zwei, dann nehme ich ein Taxi.",
+    "chinese": "天哪，扬，我是鲍里斯。我现在在火车站，你呢，你在哪里？我已经等你20多分钟了。你还有10分钟时间，到两点，然后我就打车走了。"
+  },
+  "3_4": {
+    "task": "题目 14",
+    "german": "Guten Tag, hier Rogala. Wir können am Samstag leider nicht zu Ihnen kommen. Am Sonntag haben wir aber Zeit. Rufen Sie uns doch bitte zurück, ob Ihnen das passt. Danke.",
+    "chinese": "您好，我是罗加拉。很遗憾我们周六不能去您那里。但我们周日有时间。如果您方便的话请给我们回电话。谢谢。"
+  },
+  "3_5": {
+    "task": "题目 15",
+    "german": "Hallo Alex, Walter hier. Kannst du schnell mal rüberkommen? Mein Computer hat einen Fehler. Ich kann nichts drucken. Melde dich doch bitte gleich, wenn du nach Hause kommst.",
+    "chinese": "你好亚历克斯，我是沃尔特。你能快点过来一下吗？我的电脑出故障了。我打印不了东西。你回家后请马上联系我。"
+  }
+}
