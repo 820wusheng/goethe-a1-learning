@@ -2,6 +2,36 @@
 
 完整的 Goethe-Zertifikat A1 (Start Deutsch 1) 学习资源，包含听力、阅读、写作、口语练习和词汇学习。
 
+**⭐ 特色**: 基于Skill开发，强制质量检查，避免历史错误
+
+---
+
+## 🎯 给开发者
+
+如果你想基于本项目开发新功能或修复问题：
+
+📖 **必读文档**:
+- [SKILL_USAGE.md](SKILL_USAGE.md) - Skill使用指南（强烈推荐）
+- [PITFALLS.md](PITFALLS.md) - 历史踩坑记录（开发前必读）
+- [.claude/skills/goethe-a1-builder.md](.claude/skills/goethe-a1-builder.md) - Skill定义
+
+🚀 **使用Skill开发**:
+```bash
+# 在Claude Code中调用
+/goethe-a1-builder
+
+# Skill会强制执行25项检查，确保质量
+```
+
+**为什么使用Skill?**
+- ✅ 避免重复历史错误（8大类坑）
+- ✅ 强制执行开发流程（6个阶段）
+- ✅ 自动检查清单（25项）
+- ✅ 确保浏览器测试
+- ✅ 三次确认才提交
+
+---
+
 ## 📁 目录结构
 
 ```
