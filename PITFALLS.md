@@ -444,3 +444,35 @@ assert len(all_text) == EXPECTED_COUNT  # 验证总数
 **最后更新**: 2026-06-11  
 **版本**: v1.0  
 **状态**: ✅ 所有已知坑已记录
+
+## 🔴 2026-06-12 新坑：使用错误的参考文件
+
+**问题**: 使用exam-complete.html作为参考，但它本身就没有交互功能
+
+**症状**:
+- 阅读部分无法选择答案
+- 选项没有onclick和data-answer
+- 复制后的页面全都没有交互
+
+**根本原因**:
+- exam-complete.html只是静态展示，没有JS交互
+- listening-complete.html才有完整的selectOption/submitAnswer
+- skill没有验证参考文件是否有交互功能
+
+**正确做法**:
+```bash
+# ✅ 使用listening-complete.html作为参考
+REFERENCE="html/listening-complete.html"
+
+# ✅ 验证参考文件有交互
+HAS_SELECT=$(grep -c "function selectOption" "$REFERENCE")
+if [ "$HAS_SELECT" -eq 0 ]; then
+    echo "❌ 参考文件缺少交互"
+    exit 1
+fi
+```
+
+**Skill自我修正**:
+- auto-fix-exam.sh必须验证参考文件
+- check-full-features.sh必须检查onclick存在
+- 错误发生后立即更新PITFALLS
