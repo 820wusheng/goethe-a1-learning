@@ -9,34 +9,8 @@ let userAnswers = {};       // 用户答案
 let submitted = {};         // 已提交的题目
 let transcriptData = {};    // 听力原文数据
 
-// === Teil 1 题目配置 ===
-const TEIL1_QUESTIONS = [
-    {id: 'bsp1', q: 'Welche Zimmernummer hat Herr Schneider?', opts: ['Zimmer 2.', 'Zimmer 245.', 'Zimmer 254.']},
-    {id: '1_1', q: 'Was kostet der Pullover?', opts: ['Dreißig Euro.', 'Fünfundneunzig Euro.', 'Neunzehn Euro fünfundneunzig Cent.']},
-    {id: '1_2', q: 'Wie spät ist es?', opts: ['15 Uhr.', 'Gleich 5 Uhr.', 'Halb 5 Uhr.']},
-    {id: '1_3', q: 'Was isst die Frau im Restaurant?', opts: ['Pommes.', 'Fisch.', 'Wurst.']},
-    {id: '1_4', q: 'In welche Klasse geht Frau Hegers Sohn?', opts: ['In die neunte Klasse.', 'In die dritte Klasse.', 'In die vierte Klasse.']},
-    {id: '1_5', q: 'Wie kommt die Frau in den 2. Stock?', opts: ['Mit dem Aufzug.', 'Auf der Treppe um die Ecke.', 'Mit der Rolltreppe.']},
-    {id: '1_6', q: 'Wohin fährt Herr Albers?', opts: ['In Urlaub ans Meer.', 'Zur Arbeit.', 'Zur Familie.']}
-];
-
-// === Teil 2 题目配置 ===
-const TEIL2_QUESTIONS = [
-    {id: 'bsp2', q: 'Die Reisende soll zur Information in Halle C kommen.'},
-    {id: '2_1', q: 'Die Kunden sollen die Weihnachtsfeier besuchen.'},
-    {id: '2_2', q: 'Die Fahrgäste sollen sich im Restaurant treffen.'},
-    {id: '2_3', q: 'Die Fahrgäste sollen im Zug bleiben.'},
-    {id: '2_4', q: 'Der Herr soll sofort zum Schalter kommen.'}
-];
-
-// === Teil 3 题目配置 ===
-const TEIL3_QUESTIONS = [
-    {id: '3_1', q: 'Die Nummer ist:', opts: ['11833.', '11883.', '12833.']},
-    {id: '3_2', q: 'Wo genau treffen sich die Männer?', opts: ['Am Zug.', 'Am Bahnhof.', 'An der Information.']},
-    {id: '3_3', q: 'Wie lange will der Mann noch warten?', opts: ['20 Minuten.', '2 Minuten.', '10 Minuten.']},
-    {id: '3_4', q: 'An welchem Tag will die Frau kommen?', opts: ['Am Montag.', 'Am Sonntag.', 'Am Samstag.']},
-    {id: '3_5', q: 'Was ist kaputt?', opts: ['Der Fernseher.', 'Der Computer.', 'Das Handy.']}
-];
+// 注意：TEIL1_QUESTIONS, TEIL2_QUESTIONS, TEIL3_QUESTIONS 由各页面的config文件定义
+// 例如：uebung01-config.js, uebung02-config.js, modellsatz-config.js
 
 // 切换Teil
 function showTeil(teilId) {
