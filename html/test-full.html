@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Test</title>
+    <style>
+        .container { max-width: 1000px; margin: 0 auto; }
+        .task { background: #f7fafc; padding: 25px; margin-bottom: 25px; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>测试页面</h1>
+        <div id="teil1" class="teil-section"></div>
+        <div id="teil2" class="teil-section"></div>
+        <div id="teil3" class="teil-section"></div>
+        <div id="debug"></div>
+    </div>
+
+    <script src="../js/uebung01-config.js"></script>
+    <script src="../js/quiz-common.js"></script>
+    <script>
+        const DATA_FILE = '../data/archive_uebung01.json';
+        const AUDIO_PREFIX = '../archive_audio/sd1_uebungssatz_01.mp4';
+
+        document.getElementById('debug').innerHTML = `
+            <h2>调试信息</h2>
+            <p>TEIL1_QUESTIONS数量: ${TEIL1_QUESTIONS.length}</p>
+            <p>DATA_FILE: ${DATA_FILE}</p>
+            <p>loadData函数存在: ${typeof loadData}</p>
+        `;
+
+        console.log('开始加载数据...');
+        loadData().then(() => {
+            console.log('loadData完成');
+            const teil1 = document.getElementById('teil1');
+            console.log('teil1 innerHTML长度:', teil1.innerHTML.length);
+            document.getElementById('debug').innerHTML += `<p>teil1 内容长度: ${teil1.innerHTML.length}</p>`;
+        }).catch(e => {
+            console.error('loadData错误:', e);
+            document.getElementById('debug').innerHTML += `<p style="color:red">错误: ${e.message}</p>`;
+        });
+    </script>
+</body>
+</html>
