@@ -45,14 +45,35 @@ for file in js/uebung01-config.js js/uebung02-config.js; do
 done
 echo "✅ 配置文件正确"
 
-# 5. 检查speakGerman函数
+# 5. 检查speakGerman函数（必须原生朗读）
 if ! grep -q "function speakGerman" js/quiz-common.js; then
     echo "❌ 错误: quiz-common.js缺少speakGerman函数"
     exit 1
 fi
-echo "✅ speakGerman函数存在"
+# 检查是否使用Web Speech API
+if ! grep -q "speechSynthesis" js/quiz-common.js; then
+    echo "❌ 错误: speakGerman必须使用原生Web Speech API"
+    exit 1
+fi
+echo "✅ speakGerman原生朗读功能"
 
-# 6. 检查是否有占位符
+# 6. 检查每题必须有AI朗读按钮
+SPEAK_BUTTONS=$(grep -c "onclick=\"speakGerman" js/quiz-common.js || echo 0)
+if [ "$SPEAK_BUTTONS" -lt 3 ]; then
+    echo "❌ 错误: 每题必须有AI朗读按钮 (当前: $SPEAK_BUTTONS)"
+    exit 1
+fi
+echo "✅ 每题有AI朗读按钮: $SPEAK_BUTTONS"
+
+# 7. 禁止新窗口音频链接
+NEW_WINDOW=$(grep -c "target=\"_blank\"" js/quiz-common.js || echo 0)
+if [ "$NEW_WINDOW" -gt 0 ]; then
+    echo "❌ 错误: 禁止使用target=_blank打开新窗口音频"
+    exit 1
+fi
+echo "✅ 无新窗口音频链接"
+
+# 8. 检查是否有占位符
 PLACEHOLDER=$(grep -r "开发中\|TODO\|内容\.\.\." html/*.html || echo "")
 if [ -n "$PLACEHOLDER" ]; then
     echo "❌ 错误: 发现占位符内容"
