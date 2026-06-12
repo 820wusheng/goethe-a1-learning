@@ -540,9 +540,10 @@
                                 <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                                     🔊 AI朗读
                                 </button>
-                                <audio controls style="max-width: 300px;">
-                                    <source src="../audio/audio_${q.id}.mp4" type="audio/mp4">
-                                </audio>
+                                <a href="https://bfu.goethe.de/medien/a1/audio${q.id === 'bsp1' ? '_' : q.id.startsWith('1_') ? '_' : ''}${q.id}.mp4"
+                                   target="_blank" class="btn btn-secondary">
+                                    📻 官方音频
+                                </a>
                             </div>
                         </div>
 
@@ -603,9 +604,10 @@
                                 <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                                     🔊 AI朗读
                                 </button>
-                                <audio controls style="max-width: 300px;">
-                                    <source src="../audio/audio_${q.id}.mp4" type="audio/mp4">
-                                </audio>
+                                <a href="https://bfu.goethe.de/medien/a1/audio_${q.id}.mp4"
+                                   target="_blank" class="btn btn-secondary">
+                                    📻 官方音频
+                                </a>
                             </div>
                         </div>
 
@@ -660,9 +662,10 @@
                                 <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                                     🔊 AI朗读
                                 </button>
-                                <audio controls style="max-width: 300px;">
-                                    <source src="../audio/audio${q.id}.mp4" type="audio/mp4">
-                                </audio>
+                                <a href="https://bfu.goethe.de/medien/a1/audio${q.id}.mp4"
+                                   target="_blank" class="btn btn-secondary">
+                                    📻 官方音频
+                                </a>
                             </div>
                         </div>
 
