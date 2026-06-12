@@ -197,9 +197,6 @@ function renderTeil1(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
                     </div>
                 </div>
 
@@ -252,9 +249,6 @@ function renderTeil2(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
                     </div>
                 </div>
 
@@ -301,9 +295,6 @@ function renderTeil3(data) {
                         <button class="btn btn-primary" onclick="speakGerman(\`${taskData.german.replace(/`/g, "\\`")}\`)">
                             🔊 AI朗读
                         </button>
-                        <a href="${AUDIO_PREFIX}" target="_blank" class="btn btn-secondary">
-                            📻 官方音频
-                        </a>
                     </div>
                 </div>
 
