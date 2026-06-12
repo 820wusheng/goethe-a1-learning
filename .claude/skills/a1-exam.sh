@@ -27,7 +27,7 @@ case $ACTION in
         ;;
 
     all)
-        echo "🚀 完整流程: 修复 → 检查 → 部署"
+        echo "🚀 完整流程: 重建 → 检查 → 部署"
 
         # 0. 读PITFALLS避免重复错误
         echo "📖 读取PITFALLS.md..."
@@ -37,8 +37,10 @@ case $ACTION in
         fi
         echo "✅ 已读PITFALLS.md"
 
-        # 1. 修复
-        $0 fix
+        # 1. 使用rebuild重建（而非fix修复）
+        echo "🔨 运行rebuild..."
+        ./.claude/skills/a1-exam-rebuild.sh
+        exit 0
 
         # 2. 检查
         $0 check
