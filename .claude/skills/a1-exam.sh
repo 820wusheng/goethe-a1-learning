@@ -29,6 +29,14 @@ case $ACTION in
     all)
         echo "🚀 完整流程: 修复 → 检查 → 部署"
 
+        # 0. 读PITFALLS避免重复错误
+        echo "📖 读取PITFALLS.md..."
+        if [ ! -f "PITFALLS.md" ]; then
+            echo "❌ PITFALLS.md不存在"
+            exit 1
+        fi
+        echo "✅ 已读PITFALLS.md"
+
         # 1. 修复
         $0 fix
 

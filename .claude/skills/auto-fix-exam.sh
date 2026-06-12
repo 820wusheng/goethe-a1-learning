@@ -5,7 +5,7 @@
 set -e
 
 TARGET=${1:-html/uebungssatz01.html}
-REFERENCE="html/listening-complete.html"
+REFERENCE="html/exam-complete.html"
 
 echo "🔧 自动修复试卷: $TARGET"
 echo "参考: $REFERENCE"
