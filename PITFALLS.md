@@ -530,3 +530,66 @@ cp exam-complete.html target.html
 - 使用单一完整参考文件
 - 验证数据文件存在
 - 验证线上加载成功
+
+## 🔴🔴🔴 2026-06-13 核心根本问题：项目缺少完整参考文件
+
+**终极问题**: 项目中不存在同时满足所有要求的HTML文件
+
+**现状分析**:
+- listening-complete.html: ✅ 听力答题功能 ❌ 只有听力1个部分
+- exam-complete.html: ✅ 有4个部分 ❌ 无答题功能 ❌ 无范文
+
+**用户要求** vs **现有文件**:
+| 要求 | listening-complete | exam-complete |
+|------|-------------------|---------------|
+| 听力答题 | ✅ | ❌ |
+| 阅读答题 | ❌ | ❌ |
+| 写作范文 | ❌ | ❌ |
+| 口语范文 | ❌ | ❌ |
+| 4个部分 | ❌ | ✅ |
+
+**Skill为何反复失败**:
+1. ❌ Skill假设"参考文件是完整的"
+2. ❌ Skill只会复制/合并现有文件
+3. ❌ Skill无法自动生成交互代码
+4. ❌ Skill无法自动编写A1范文
+
+**正确做法**:
+需要手动创建一个完整的master.html包含:
+```javascript
+// 1. 阅读答题功能
+function selectOption(taskId, answer, element) { ... }
+function submitAnswer(taskId) { ... }
+
+// 2. HTML中每个选项
+<div class="option" data-answer="a" onclick="selectOption('lesen1', 'a', this)">
+    正确
+</div>
+<button onclick="submitAnswer('lesen1')">提交答案</button>
+
+// 3. 写作标准答案
+const SCHREIBEN_TEMPLATES = {
+    teil1: "Liebe Maria, ...",  // A1级别范文
+    teil2: "Hallo Tom, ..."
+};
+
+// 4. 口语场景范文
+const SPRECHEN_EXAMPLES = {
+    teil1: {
+        german: "Ich heiße...",
+        chinese: "我叫..."
+    }
+};
+```
+
+**Skill自我认知更新**:
+- ❌ Skill不能创造不存在的功能
+- ❌ Skill只能组合现有代码
+- ✅ Skill应该早点报告"缺少参考文件"而非盲目复制
+- ✅ Skill应该列出缺少的功能清单
+
+**如何避免重复**:
+1. 先用build-interactive-exam.sh检查
+2. 如果报错缺少参考文件，停止
+3. 手动创建完整参考文件
+4. 再运行Skill
