@@ -97,51 +97,105 @@ function speakGerman(text) {\
     echo "✅ 已添加交互JS"
 fi
 
-# 步骤3：修改阅读选项添加onclick
+# 步骤3：修改阅读选项添加onclick + 提交按钮 + 答案数据
 echo ""
 echo "🔨 修改阅读选项..."
 
-# 使用Python脚本修改HTML（因为sed处理复杂HTML很困难）
+# 使用Python脚本修改HTML
 python3 << 'PYTHON_EOF'
 import re
-import sys
 
 with open("html/exam-complete.html", "r", encoding="utf-8") as f:
     html = f.read()
 
-# 修复阅读部分的选项
-# 查找 Lesen 部分的选项并添加onclick
+# 阅读部分15题，固定taskId: lesen1-lesen15
+# Teil 1: lesen1-lesen5 (richtig/falsch)
+# Teil 2: lesen6-lesen10 (richtig/falsch)
+# Teil 3: lesen11-lesen15 (选择题)
 
-# 模式1：Richtig 正确
-html = re.sub(
-    r'<div class="option">✓ Richtig 正确</div>',
-    '<div class="option" data-answer="richtig" onclick="selectOption(\'lesen-\' + Math.random().toString(36).substr(2,9), \'richtig\', this)"><strong>a</strong> Richtig 正确</div>',
-    html
-)
+# 查找所有阅读task，按顺序添加固定ID
+lesen_count = 0
 
-# 模式2：Falsch 错误
-html = re.sub(
-    r'<div class="option">✗ Falsch 错误</div>',
-    '<div class="option" data-answer="falsch" onclick="selectOption(\'lesen-\' + Math.random().toString(36).substr(2,9), \'falsch\', this)"><strong>b</strong> Falsch 错误</div>',
-    html
-)
+def replace_lesen_task(match):
+    global lesen_count
+    lesen_count += 1
+    task_id = f"lesen{lesen_count}"
 
-# 模式3：简单的 Richtig/Falsch
-html = re.sub(
-    r'<div class="option">Richtig 正确</div>',
-    '<div class="option" data-answer="richtig" onclick="selectOption(\'lesen-\' + Math.random().toString(36).substr(2,9), \'richtig\', this)"><strong>a</strong> Richtig 正确</div>',
-    html
-)
-html = re.sub(
-    r'<div class="option">Falsch 错误</div>',
-    '<div class="option" data-answer="falsch" onclick="selectOption(\'lesen-\' + Math.random().toString(36).substr(2,9), \'falsch\', this)"><strong>b</strong> Falsch 错误</div>',
-    html
-)
+    task_content = match.group(0)
+
+    # 添加task ID属性
+    task_content = task_content.replace(
+        '<div class="task">',
+        f'<div class="task" id="task-{task_id}">',
+        1
+    )
+
+    # 替换选项添加固定taskId
+    # Richtig选项
+    task_content = re.sub(
+        r'<div class="option">.*?Richtig 正确</div>',
+        f'<div class="option" data-answer="richtig" onclick="selectOption(\'{task_id}\', \'richtig\', this)"><strong>a</strong> Richtig 正确</div>',
+        task_content
+    )
+    # Falsch选项
+    task_content = re.sub(
+        r'<div class="option">.*?Falsch 错误</div>',
+        f'<div class="option" data-answer="falsch" onclick="selectOption(\'{task_id}\', \'falsch\', this)"><strong>b</strong> Falsch 错误</div>',
+        task_content
+    )
+
+    # 在options后添加提交按钮和结果区域
+    if '<button class="submit-btn"' not in task_content:
+        task_content = task_content.replace(
+            '</div>\n                </div>',
+            f'''</div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('{task_id}')">提交答案</button>
+                        <div class="result-message"></div>
+                </div>''',
+            1
+        )
+
+    return task_content
+
+# 在Lesen部分查找所有task
+lesen_section = re.search(r'<div id="lesen" class="section">.*?(?=<div id="schreiben"|$)', html, re.DOTALL)
+if lesen_section:
+    lesen_html = lesen_section.group(0)
+    # 替换所有阅读task
+    lesen_html_new = re.sub(
+        r'<div class="task">.*?</div>\n                </div>',
+        replace_lesen_task,
+        lesen_html,
+        flags=re.DOTALL
+    )
+    html = html.replace(lesen_html, lesen_html_new)
+
+# 添加answers数据到<script>标签开头
+answers_data = """
+// 阅读答案数据
+answers['lesen1'] = 'falsch';
+answers['lesen2'] = 'richtig';
+answers['lesen3'] = 'falsch';
+answers['lesen4'] = 'richtig';
+answers['lesen5'] = 'falsch';
+answers['lesen6'] = 'richtig';
+answers['lesen7'] = 'falsch';
+answers['lesen8'] = 'richtig';
+answers['lesen9'] = 'falsch';
+answers['lesen10'] = 'richtig';
+"""
+
+if "answers['lesen1']" not in html:
+    html = html.replace(
+        'let answers = {};',
+        'let answers = {};' + answers_data,
+        1
+    )
 
 with open("html/exam-complete.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print("✅ 阅读选项已添加onclick")
+print(f"✅ 阅读选项已添加onclick（共{lesen_count}题）")
 PYTHON_EOF
 
 # 步骤4：添加写作口语答案显示
@@ -183,37 +237,89 @@ if 'id="schreiben"' in html and "A1标准答案示例" not in html:
         1
     )
 
-# 在口语部分添加范文
-sprechen_answer = """
+# 在口语部分添加范文（3个Teil）
+sprechen_teil1 = """
 <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
-    <h4>💬 A1场景对话示例</h4>
+    <h4>💬 Teil 1 A1标准答案示例</h4>
     <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
-        <p><strong>1. Name 名字</strong></p>
-        <p>🇩🇪 Ich heiße Max Müller.</p>
-        <p>🇨🇳 我叫马克斯·穆勒。</p>
+        <p><strong>🇩🇪 德语：</strong></p>
+        <p>Hallo! Ich heiße Max Müller. Ich bin 25 Jahre alt. Ich komme aus Deutschland. Ich wohne in Berlin. Ich bin Student. Ich studiere Informatik.</p>
         <hr>
-        <p><strong>2. Alter 年龄</strong></p>
-        <p>🇩🇪 Ich bin 25 Jahre alt.</p>
-        <p>🇨🇳 我25岁。</p>
-        <hr>
-        <p><strong>3. Wohnort 居住地</strong></p>
-        <p>🇩🇪 Ich wohne in Berlin.</p>
-        <p>🇨🇳 我住在柏林。</p>
-        <hr>
-        <p><strong>4. Beruf 职业</strong></p>
-        <p>🇩🇪 Ich bin Student/Studentin.</p>
-        <p>🇨🇳 我是学生。</p>
+        <p><strong>🇨🇳 中文：</strong></p>
+        <p>你好！我叫马克斯·穆勒。我25岁。我来自德国。我住在柏林。我是学生。我学习计算机科学。</p>
     </div>
 </div>
 """
 
-if 'id="sprechen"' in html and "A1场景对话示例" not in html:
-    # 在Sprechen section的第一个part-content之后插入
-    html = html.replace(
-        '<div id="sprechen1" class="part-content active">',
-        '<div id="sprechen1" class="part-content active">' + sprechen_answer,
-        1
-    )
+sprechen_teil2 = """
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 Teil 2 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>情景：邀请朋友一起去看电影</strong></p>
+        <p><strong>🇩🇪 德语：</strong></p>
+        <p>A: Hallo! Möchtest du am Samstag ins Kino gehen?</p>
+        <p>B: Ja, gerne! Wann?</p>
+        <p>A: Um 19 Uhr. Ist das gut?</p>
+        <p>B: Ja, das passt. Welcher Film?</p>
+        <p>A: Ein Actionfilm. Bis Samstag!</p>
+        <p>B: Bis dann!</p>
+        <hr>
+        <p><strong>🇨🇳 中文：</strong></p>
+        <p>A: 你好！你周六想去看电影吗？</p>
+        <p>B: 好的，很乐意！什么时候？</p>
+        <p>A: 19点。可以吗？</p>
+        <p>B: 好的，没问题。什么电影？</p>
+        <p>A: 一部动作片。周六见！</p>
+        <p>B: 到时候见！</p>
+    </div>
+</div>
+"""
+
+sprechen_teil3 = """
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 Teil 3 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>情景：在餐厅点餐</strong></p>
+        <p><strong>🇩🇪 德语请求：</strong></p>
+        <p>• Ich möchte eine Pizza, bitte. （我想要一个披萨，请。）</p>
+        <p>• Kann ich ein Wasser haben? （我可以要一杯水吗？）</p>
+        <p>• Die Rechnung, bitte! （请给我账单！）</p>
+        <hr>
+        <p><strong>🇩🇪 德语回应：</strong></p>
+        <p>• Ja, gerne! （好的，很乐意！）</p>
+        <p>• Einen Moment, bitte. （请稍等。）</p>
+        <p>• Hier, bitte! （给您！）</p>
+        <hr>
+        <p><strong>常用句型：</strong></p>
+        <p>• Entschuldigung, ... （不好意思，...）</p>
+        <p>• Danke! / Vielen Dank! （谢谢！）</p>
+        <p>• Auf Wiedersehen! （再见！）</p>
+    </div>
+</div>
+"""
+
+if 'id="sprechen"' in html:
+    # Teil 1
+    if "Teil 1 A1标准答案示例" not in html:
+        html = html.replace(
+            '<div id="sprechen1" class="part-content active">',
+            '<div id="sprechen1" class="part-content active">' + sprechen_teil1,
+            1
+        )
+    # Teil 2
+    if "Teil 2 A1标准答案示例" not in html:
+        html = html.replace(
+            '<div id="sprechen2" class="part-content">',
+            '<div id="sprechen2" class="part-content">' + sprechen_teil2,
+            1
+        )
+    # Teil 3
+    if "Teil 3 A1标准答案示例" not in html:
+        html = html.replace(
+            '<div id="sprechen3" class="part-content">',
+            '<div id="sprechen3" class="part-content">' + sprechen_teil3,
+            1
+        )
 
 with open("html/exam-complete.html", "w", encoding="utf-8") as f:
     f.write(html)
@@ -225,16 +331,35 @@ PYTHON_EOF
 echo ""
 echo "🔍 验证修改..."
 
-ONCLICK_COUNT=$(grep -c 'onclick="selectOption' html/exam-complete.html || echo 0)
-SCHREIBEN_ANS=$(grep -c "A1标准答案示例" html/exam-complete.html || echo 0)
-SPRECHEN_ANS=$(grep -c "A1场景对话示例" html/exam-complete.html || echo 0)
+ONCLICK_COUNT=$(grep 'onclick="selectOption' html/exam-complete.html | wc -l | tr -d ' ')
+SUBMIT_BTN=$(grep 'class="submit-btn"' html/exam-complete.html | wc -l | tr -d ' ')
+SCHREIBEN_ANS=$(grep "A1标准答案示例" html/exam-complete.html | wc -l | tr -d ' ')
+SPRECHEN_TEIL1=$(grep "Teil 1 A1标准答案示例" html/exam-complete.html | wc -l | tr -d ' ')
+SPRECHEN_TEIL2=$(grep "Teil 2 A1标准答案示例" html/exam-complete.html | wc -l | tr -d ' ')
+SPRECHEN_TEIL3=$(grep "Teil 3 A1标准答案示例" html/exam-complete.html | wc -l | tr -d ' ')
 
 echo "阅读可点击选项: $ONCLICK_COUNT"
+echo "阅读提交按钮: $SUBMIT_BTN"
 echo "写作答案: $SCHREIBEN_ANS"
-echo "口语答案: $SPRECHEN_ANS"
+echo "口语Teil1答案: $SPRECHEN_TEIL1"
+echo "口语Teil2答案: $SPRECHEN_TEIL2"
+echo "口语Teil3答案: $SPRECHEN_TEIL3"
 
-if [ "$ONCLICK_COUNT" -eq 0 ]; then
+if [ "$ONCLICK_COUNT" = "0" ]; then
     echo "❌ 阅读选项未添加onclick"
+    exit 1
+fi
+
+if [ "$SUBMIT_BTN" = "0" ]; then
+    echo "❌ 缺少提交按钮"
+    exit 1
+fi
+
+if [ "$SPRECHEN_TEIL1" = "0" ] || [ "$SPRECHEN_TEIL2" = "0" ] || [ "$SPRECHEN_TEIL3" = "0" ]; then
+    echo "❌ 口语部分缺少完整范文（需要3个Teil）"
+    echo "  Teil1: $SPRECHEN_TEIL1"
+    echo "  Teil2: $SPRECHEN_TEIL2"
+    echo "  Teil3: $SPRECHEN_TEIL3"
     exit 1
 fi
 

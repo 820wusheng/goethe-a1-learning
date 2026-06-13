@@ -670,6 +670,25 @@ alle 30 Minuten</div>
 
             <!-- Teil 1 -->
             <div id="schreiben1" class="part-content active">
+<div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0;">
+    <h4>📝 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>德语：</strong></p>
+        <p>Liebe Maria,<br>
+        danke für deine Einladung. Ich komme gern zu deiner Party.<br>
+        Ich bringe einen Kuchen mit.<br>
+        Viele Grüße<br>
+        Max</p>
+        <hr>
+        <p><strong>中文：</strong></p>
+        <p>亲爱的Maria，<br>
+        谢谢你的邀请。我很乐意来参加你的派对。<br>
+        我会带一个蛋糕。<br>
+        祝好<br>
+        Max</p>
+    </div>
+</div>
+
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 1: 填写表格</h3>
 
                 <div class="task">
@@ -778,6 +797,27 @@ Mit freundlichen Grüßen
 
             <!-- Teil 1 -->
             <div id="sprechen1" class="part-content active">
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 A1场景对话示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>1. Name 名字</strong></p>
+        <p>🇩🇪 Ich heiße Max Müller.</p>
+        <p>🇨🇳 我叫马克斯·穆勒。</p>
+        <hr>
+        <p><strong>2. Alter 年龄</strong></p>
+        <p>🇩🇪 Ich bin 25 Jahre alt.</p>
+        <p>🇨🇳 我25岁。</p>
+        <hr>
+        <p><strong>3. Wohnort 居住地</strong></p>
+        <p>🇩🇪 Ich wohne in Berlin.</p>
+        <p>🇨🇳 我住在柏林。</p>
+        <hr>
+        <p><strong>4. Beruf 职业</strong></p>
+        <p>🇩🇪 Ich bin Student/Studentin.</p>
+        <p>🇨🇳 我是学生。</p>
+    </div>
+</div>
+
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 1: Sich vorstellen 自我介绍</h3>
 
                 <div class="task">

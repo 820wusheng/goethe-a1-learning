@@ -87,19 +87,27 @@ if [ "$SPRECHEN_COUNT" = "0" ] || [ -z "$SPRECHEN_COUNT" ]; then
     exit 1
 fi
 
-SPRECHEN_ANSWER=$(grep "A1场景对话示例" "$TARGET" | wc -l | tr -d ' ')
-if [ "$SPRECHEN_ANSWER" = "0" ] || [ -z "$SPRECHEN_ANSWER" ]; then
-    echo "❌ 口语部分缺少A1场景对话！"
+SPRECHEN_TEIL1=$(grep "Teil 1 A1标准答案示例" "$TARGET" | wc -l | tr -d ' ')
+SPRECHEN_TEIL2=$(grep "Teil 2 A1标准答案示例" "$TARGET" | wc -l | tr -d ' ')
+SPRECHEN_TEIL3=$(grep "Teil 3 A1标准答案示例" "$TARGET" | wc -l | tr -d ' ')
+
+if [ "$SPRECHEN_TEIL1" = "0" ] || [ "$SPRECHEN_TEIL2" = "0" ] || [ "$SPRECHEN_TEIL3" = "0" ]; then
+    echo "❌ 口语部分缺少完整A1范文（需要3个Teil）！"
+    echo ""
+    echo "当前状态:"
+    echo "  Teil 1: $SPRECHEN_TEIL1"
+    echo "  Teil 2: $SPRECHEN_TEIL2"
+    echo "  Teil 3: $SPRECHEN_TEIL3"
     echo ""
     echo "应该包含:"
-    echo "  💬 A1场景对话示例"
-    echo "  Name: Ich heiße Max..."
-    echo "  Alter: Ich bin 25 Jahre alt..."
+    echo "  💬 Teil 1 A1标准答案示例 - 自我介绍"
+    echo "  💬 Teil 2 A1标准答案示例 - 日常对话"
+    echo "  💬 Teil 3 A1标准答案示例 - 请求与回应"
     echo ""
     exit 1
 fi
 
-echo "✅ 口语：存在且有A1对话 (Sprechen=$SPRECHEN_COUNT, 对话=$SPRECHEN_ANSWER)"
+echo "✅ 口语：存在且有3个Teil完整范文 (Sprechen=$SPRECHEN_COUNT, Teil1/2/3都有)"
 
 echo ""
 echo "✅ 全量功能检查通过！"
