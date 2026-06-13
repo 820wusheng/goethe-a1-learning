@@ -333,7 +333,7 @@
             <div id="lesen1" class="part-content active">
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 1: Lesen Sie die beiden Texte und die Aufgaben 1 bis 5</h3>
 
-                <div class="task">
+                <div class="task" id="task-lesen1">
                     <div class="task-header">
                         <div class="task-title">Beispiel 示例</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_bsp')">显示翻译</button>
@@ -352,9 +352,11 @@ Karin</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen1')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen2">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 1</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_1')">显示翻译</button>
@@ -365,9 +367,11 @@ Karin</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen2')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen3">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 2</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_2')">显示翻译</button>
@@ -378,6 +382,8 @@ Karin</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen3')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
                 <div class="email-box">Liebe Carmen,
@@ -391,7 +397,7 @@ Ich freue mich sehr auf dich!
 Bis zum Wochenende
 Ralf</div>
 
-                <div class="task">
+                <div class="task" id="task-lesen4">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 3</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_3')">显示翻译</button>
@@ -402,9 +408,11 @@ Ralf</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen4')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen5">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 4</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_4')">显示翻译</button>
@@ -415,9 +423,11 @@ Ralf</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen5')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen6">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 5</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_5')">显示翻译</button>
@@ -428,6 +438,8 @@ Ralf</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen6')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
             </div>
 
@@ -436,7 +448,7 @@ Ralf</div>
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 2: Lesen Sie die Texte und die Aufgaben 6 bis 10</h3>
                 <p style="margin-bottom: 20px;"><strong>Wo finden Sie Informationen? Kreuzen Sie an: a oder b</strong></p>
 
-                <div class="task">
+                <div class="task" id="task-lesen7">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 6</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_6')">显示翻译</button>
@@ -447,9 +459,11 @@ Ralf</div>
                         <div class="option"><strong>a</strong> www.schiff-ruedesheim.de</div>
                         <div class="option"><strong>b</strong> www.bingen-ruedesheimer.de</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen7')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen8">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 7</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_7')">显示翻译</button>
@@ -460,9 +474,11 @@ Ralf</div>
                         <div class="option"><strong>a</strong> www.sprachenfuchs.de</div>
                         <div class="option"><strong>b</strong> www.eviva.com</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen8')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen9">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 8</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_8')">显示翻译</button>
@@ -473,9 +489,11 @@ Ralf</div>
                         <div class="option"><strong>a</strong> www.DER.com</div>
                         <div class="option"><strong>b</strong> www.RED.com</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen9')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen10">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 9</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_9')">显示翻译</button>
@@ -486,9 +504,11 @@ Ralf</div>
                         <div class="option"><strong>a</strong> www.bodensee.de</div>
                         <div class="option"><strong>b</strong> www.rottenmeier.de</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen10')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen11">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 10</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_10')">显示翻译</button>
@@ -580,9 +600,11 @@ Belegte Brötchen und Getränke für
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen11')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen12">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 12: An der Post</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_12')">显示翻译</button>
@@ -600,9 +622,11 @@ samstags
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen12')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen13">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 13: Am Bahnhof</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_13')">显示翻译</button>
@@ -616,9 +640,11 @@ Rauchen verboten.</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen13')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen14">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 14: Eingang Restaurant</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_14')">显示翻译</button>
@@ -634,9 +660,11 @@ Volksmusik, ab 20 Uhr Tanz</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen14')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
 
-                <div class="task">
+                <div class="task" id="task-lesen15">
                     <div class="task-header">
                         <div class="task-title">Aufgabe 15: An der Haltestelle</div>
                         <button class="btn btn-secondary" onclick="toggleTranslation('lesen_15')">显示翻译</button>
@@ -652,6 +680,8 @@ alle 30 Minuten</div>
                         <div class="option" data-answer="richtig" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"><strong>a</strong> Richtig 正确</div>
                         <div class="option" data-answer="falsch" onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'falsch', this)"><strong>b</strong> Falsch 错误</div>
                     </div>
+                        <button class="submit-btn" disabled onclick="submitAnswer('lesen15')">提交答案</button>
+                        <div class="result-message"></div>
                 </div>
             </div>
         </div>
@@ -798,6 +828,17 @@ Mit freundlichen Grüßen
             <!-- Teil 1 -->
             <div id="sprechen1" class="part-content active">
 <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 Teil 1 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>🇩🇪 德语：</strong></p>
+        <p>Hallo! Ich heiße Max Müller. Ich bin 25 Jahre alt. Ich komme aus Deutschland. Ich wohne in Berlin. Ich bin Student. Ich studiere Informatik.</p>
+        <hr>
+        <p><strong>🇨🇳 中文：</strong></p>
+        <p>你好！我叫马克斯·穆勒。我25岁。我来自德国。我住在柏林。我是学生。我学习计算机科学。</p>
+    </div>
+</div>
+
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
     <h4>💬 A1场景对话示例</h4>
     <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
         <p><strong>1. Name 名字</strong></p>
@@ -870,6 +911,28 @@ Mit freundlichen Grüßen
 
             <!-- Teil 2 -->
             <div id="sprechen2" class="part-content">
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 Teil 2 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>情景：邀请朋友一起去看电影</strong></p>
+        <p><strong>🇩🇪 德语：</strong></p>
+        <p>A: Hallo! Möchtest du am Samstag ins Kino gehen?</p>
+        <p>B: Ja, gerne! Wann?</p>
+        <p>A: Um 19 Uhr. Ist das gut?</p>
+        <p>B: Ja, das passt. Welcher Film?</p>
+        <p>A: Ein Actionfilm. Bis Samstag!</p>
+        <p>B: Bis dann!</p>
+        <hr>
+        <p><strong>🇨🇳 中文：</strong></p>
+        <p>A: 你好！你周六想去看电影吗？</p>
+        <p>B: 好的，很乐意！什么时候？</p>
+        <p>A: 19点。可以吗？</p>
+        <p>B: 好的，没问题。什么电影？</p>
+        <p>A: 一部动作片。周六见！</p>
+        <p>B: 到时候见！</p>
+    </div>
+</div>
+
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 2: Um Informationen bitten und Informationen geben</h3>
                 <h4 style="margin-bottom: 15px;">询问和提供信息</h4>
 
@@ -936,6 +999,27 @@ Mit freundlichen Grüßen
 
             <!-- Teil 3 -->
             <div id="sprechen3" class="part-content">
+<div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+    <h4>💬 Teil 3 A1标准答案示例</h4>
+    <div style="background: white; padding: 10px; margin-top: 10px; border-radius: 4px;">
+        <p><strong>情景：在餐厅点餐</strong></p>
+        <p><strong>🇩🇪 德语请求：</strong></p>
+        <p>• Ich möchte eine Pizza, bitte. （我想要一个披萨，请。）</p>
+        <p>• Kann ich ein Wasser haben? （我可以要一杯水吗？）</p>
+        <p>• Die Rechnung, bitte! （请给我账单！）</p>
+        <hr>
+        <p><strong>🇩🇪 德语回应：</strong></p>
+        <p>• Ja, gerne! （好的，很乐意！）</p>
+        <p>• Einen Moment, bitte. （请稍等。）</p>
+        <p>• Hier, bitte! （给您！）</p>
+        <hr>
+        <p><strong>常用句型：</strong></p>
+        <p>• Entschuldigung, ... （不好意思，...）</p>
+        <p>• Danke! / Vielen Dank! （谢谢！）</p>
+        <p>• Auf Wiedersehen! （再见！）</p>
+    </div>
+</div>
+
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 3: Bitten formulieren und darauf reagieren</h3>
                 <h4 style="margin-bottom: 15px;">提出请求并做出回应</h4>
 
@@ -1078,6 +1162,18 @@ Mit freundlichen Grüßen
 <!-- 交互功能JS（从listening-complete提取）-->
 <script>
 let answers = {};
+// 阅读答案数据
+answers['lesen1'] = 'falsch';
+answers['lesen2'] = 'richtig';
+answers['lesen3'] = 'falsch';
+answers['lesen4'] = 'richtig';
+answers['lesen5'] = 'falsch';
+answers['lesen6'] = 'richtig';
+answers['lesen7'] = 'falsch';
+answers['lesen8'] = 'richtig';
+answers['lesen9'] = 'falsch';
+answers['lesen10'] = 'richtig';
+
 let userAnswers = {};
 let submitted = {};
 
