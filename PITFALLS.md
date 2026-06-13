@@ -503,3 +503,30 @@ extract_js listening-complete.html >> target.html
 
 **Skill修正**:
 build-complete-exam.sh会合并两个参考文件
+
+## 🔴 2026-06-13 错误：复制了专用JS导致冲突
+
+**问题**: build-complete-exam复制listening-complete的听力专用JS到4部分试卷
+
+**症状**:
+- 页面报错"加载失败，请确保transcripts_with_translation.json存在"
+- 文件存在但JS执行失败
+
+**根本原因**:
+listening-complete的fetch逻辑依赖特定DOM结构
+复制到exam-complete导致DOM不匹配
+
+**正确做法**:
+```bash
+# ✅ 直接使用exam-complete
+# 它已经有4部分+正确的数据加载逻辑
+cp exam-complete.html target.html
+
+# ❌ 不要拼接不同页面的JS
+```
+
+**Skill自我修正**:
+- build-complete-exam-v2.sh不再拼接JS
+- 使用单一完整参考文件
+- 验证数据文件存在
+- 验证线上加载成功
