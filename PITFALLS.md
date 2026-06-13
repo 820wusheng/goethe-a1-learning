@@ -634,3 +634,25 @@ const SPRECHEN_EXAMPLES = {
 1. master-skill必须调用check-full-features
 2. 检查失败必须中止，不能继续部署
 3. 创建包含完整答题功能的master.html参考文件
+
+## ✅ 2026-06-13 Skill自我改进：完整Review机制
+
+**改进**: 创建master-skill.sh带前中后Review
+
+**流程**:
+1. 开发前Review: 读取PITFALLS所有历史错误
+2. 中期Review: 检查参考文件完整性，记录缺失功能
+3. 开发: 使用最佳可用策略
+4. 后期Review: 本地验证→部署→线上验证
+5. 文档: 更新PITFALLS和KNOWN_LIMITATIONS
+
+**Skill自我认知**:
+- ✅ Skill明确自己的限制（不能生成新代码）
+- ✅ Skill会记录无法实现的功能
+- ✅ Skill会提示需要手动完成的工作
+- ✅ Skill不再盲目承诺能完成所有要求
+
+**避免重复错误**:
+- 每次开发前必读PITFALLS
+- 中期检查避免使用错误参考
+- 后期验证避免部署有问题的代码
