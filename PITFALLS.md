@@ -706,3 +706,95 @@ const SPRECHEN_EXAMPLES = {
 🔴 **所有shell脚本计数必须用wc -l | tr -d ' '去除空格**
 🔴 **字符串比较用[ "$X" = "0" ]不用[ $X -eq 0 ]**
 
+
+---
+
+## 🔴🔴🔴 2026-06-13 重复核心错误：阅读答题taskId随机导致无法提交
+
+### 问题
+用户反馈：阅读还是点击了不选中，没有判断对错
+
+### 症状
+```javascript
+// ❌ 错误：每次点击生成不同的随机ID
+onclick="selectOption('lesen-' + Math.random().toString(36).substr(2,9), 'richtig', this)"
+// 结果：每个选项的taskId都不同，无法提交
+```
+
+### 根本原因
+1. ❌ Python脚本用re.sub查找原始模式但HTML已被修改过
+2. ❌ 备份文件保存的是已修改版本，无法恢复原始
+3. ❌ 没有学习听力的正确模式：固定taskId
+4. ❌ 连续3次犯同样错误但没有对比听力结构
+
+### 正确做法
+```javascript
+// ✅ 听力的正确模式（从一开始就要学习）
+onclick="selectOption('${q.id}', '${String.fromCharCode(97 + i)}', this)"
+// 固定的taskId，所有选项共享同一个ID
+
+// ✅ 阅读应该这样
+onclick="selectOption('lesen1', 'richtig', this)"  // 固定ID
+onclick="selectOption('lesen1', 'falsch', this)"   // 同一个task用同一个ID
+
+// ✅ 每个task需要
+<div class="task" id="task-lesen1">               // task容器ID
+  <div class="option" ... onclick="selectOption('lesen1', ...">  // 固定taskId
+  <div class="option" ... onclick="selectOption('lesen1', ...">  // 同一个ID
+  <button onclick="submitAnswer('lesen1')">提交答案</button>     // 提交用同一个ID
+  <div class="result-message"></div>                            // 结果显示区
+</div>
+
+// ✅ answers数据
+answers['lesen1'] = 'richtig';  // 正确答案
+```
+
+### 为何反复犯错
+1. ❌ **没有对比听力结构** - 听力早就有正确实现但从未学习
+2. ❌ **Python脚本假设HTML是原始的** - 实际已被修改多次
+3. ❌ **备份策略错误** - 在修改后才备份，无法恢复
+4. ❌ **验证不充分** - check看到onclick就通过，未检查是否固定ID
+
+### 解决方案
+```bash
+# ✅ 简单直接的Python替换（不依赖re.sub复杂模式）
+for i in range(1, 16):
+    task_id = f"lesen{i}"
+    # 按顺序替换，每次只替换第一个出现
+    html = html.replace(
+        "selectOption('lesen-' + Math.random()..., 'richtig', this)",
+        f"selectOption('{task_id}', 'richtig', this)",
+        1  # 关键：count=1 只替换第一个
+    )
+```
+
+### Skill自我改进
+- ✅ 应该先检查听力结构学习正确模式
+- ✅ 应该检测到随机ID立即报错
+- ✅ 应该提示"看听力怎么做的"
+- ✅ check应该验证taskId是固定的不是随机的
+
+### 口语范文问题
+
+**问题**: 只有Teil 1有范文，用户要求3个Teil都要
+
+**原因**: Python脚本只查找并替换了sprechen1
+
+**正确做法**:
+```python
+# ✅ 3个Teil分别添加
+sprechen_teil1 = "...自我介绍范文..."
+sprechen_teil2 = "...日常对话范文..."
+sprechen_teil3 = "...请求回应范文..."
+
+html = html.replace('<div id="sprechen1" ...>', ... + sprechen_teil1, 1)
+html = html.replace('<div id="sprechen2" ...>', ... + sprechen_teil2, 1)
+html = html.replace('<div id="sprechen3" ...>', ... + sprechen_teil3, 1)
+```
+
+### 关键规则
+🔴 **答题功能必须参考听力的实现，不要自己发明**
+🔴 **taskId必须固定，同一个task的所有选项用同一个ID**
+🔴 **口语3个Teil都要范文，不是只有Teil 1**
+🔴 **验证要检查taskId是固定的（grep "lesen1" 而非grep "lesen-"）**
+

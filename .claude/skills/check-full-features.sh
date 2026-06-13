@@ -50,6 +50,20 @@ fi
 
 echo "✅ 阅读：有答题功能 (可点击选项=$LESEN_CLICKABLE)"
 
+# 2.5 检查CSS样式（.selected）
+CSS_SELECTED=$(grep ".option.selected" "$TARGET" | wc -l | tr -d ' ')
+if [ "$CSS_SELECTED" = "0" ] || [ -z "$CSS_SELECTED" ]; then
+    echo "❌ 缺少.selected CSS样式！点击选项不会高亮"
+    echo ""
+    echo "应该有:"
+    echo "  .option.selected {"
+    echo "      border-color: #667eea;"
+    echo "      background: #e6f2ff;"
+    echo "  }"
+    exit 1
+fi
+echo "✅ 阅读：有CSS高亮样式"
+
 # 3. 阅读：文章必须有翻译
 LESEN_TRANSLATION=$(grep -A 100 "Lesen" "$TARGET" | grep "中文翻译\|chinese-text" | wc -l | tr -d ' ')
 if [ "$LESEN_TRANSLATION" = "0" ] || [ -z "$LESEN_TRANSLATION" ]; then
