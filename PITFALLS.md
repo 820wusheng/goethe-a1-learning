@@ -476,3 +476,30 @@ fi
 - auto-fix-exam.sh必须验证参考文件
 - check-full-features.sh必须检查onclick存在
 - 错误发生后立即更新PITFALLS
+
+## 🔴 2026-06-13 核心错误：没有完整参考文件
+
+**问题**: 项目中没有任何HTML同时具备4部分和交互功能
+
+**现状**:
+- listening-complete.html: 只有听力，但有交互JS
+- exam-complete.html: 有4部分，但无交互JS
+- 所有试卷: 复制单一参考导致不完整
+
+**根本原因**:
+Skill假设存在"完整参考文件"，但实际不存在
+
+**正确做法**:
+```bash
+# ✅ 不能只复制一个文件
+# ✅ 需要合并两个文件的优势
+
+# 从exam-complete获取4部分结构
+cp exam-complete.html target.html
+
+# 从listening-complete提取交互JS
+extract_js listening-complete.html >> target.html
+```
+
+**Skill修正**:
+build-complete-exam.sh会合并两个参考文件
