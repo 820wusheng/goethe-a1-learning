@@ -593,3 +593,44 @@ const SPRECHEN_EXAMPLES = {
 2. 如果报错缺少参考文件，停止
 3. 手动创建完整参考文件
 4. 再运行Skill
+
+## 🔴🔴🔴 2026-06-13 重复错误：阅读部分无答题功能（第N次）
+
+**问题**: 阅读选项无法点击，无法选择答案
+
+**症状**:
+```html
+<!-- ❌ 错误：静态展示，无法点击 -->
+<div class="option">✓ Richtig 正确</div>
+<div class="option">✗ Falsch 错误</div>
+```
+
+**应该是**:
+```html
+<!-- ✅ 正确：可点击，有答题功能 -->
+<div class="option" data-answer="a" onclick="selectOption('lesen1', 'a', this)">
+  <strong>a</strong> Richtig 正确
+</div>
+<div class="option" data-answer="b" onclick="selectOption('lesen1', 'b', this)">
+  <strong>b</strong> Falsch 错误
+</div>
+<button onclick="submitAnswer('lesen1')">提交答案</button>
+<div class="result-message"></div>
+```
+
+**为何重复发生（已是第N次）**:
+1. ❌ Skill检查不严格（grep计数有换行导致误判）
+2. ❌ 盲目复制exam-complete.html（它本身就没答题功能）
+3. ❌ 没有实际点击测试
+4. ❌ 线上验证只检查HTTP状态，未检查功能
+
+**Skill已改进**:
+- ✅ check-full-features.sh现在强制检查onclick存在
+- ✅ 修复grep计数问题（使用wc -l | tr -d ' '）
+- ✅ 显示实际选项HTML供人工确认
+- ✅ 检测到缺失立即报错并显示正确示例
+
+**如何永久避免**:
+1. master-skill必须调用check-full-features
+2. 检查失败必须中止，不能继续部署
+3. 创建包含完整答题功能的master.html参考文件

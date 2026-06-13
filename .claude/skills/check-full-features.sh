@@ -16,20 +16,39 @@ if [ "$HOEREN_NEW_WINDOW" -gt 0 ]; then
 fi
 echo "✅ 听力：无新窗口链接"
 
-# 2. 阅读：必须存在且有答题功能
+# 2. 阅读：必须存在且有答题功能（强制检查）
 echo "📖 检查阅读部分..."
 LESEN_COUNT=$(grep -c "Lesen\|阅读" "$TARGET" || echo 0)
 if [ "$LESEN_COUNT" -eq 0 ]; then
     echo "❌ 缺少阅读部分！页面只有听力"
     exit 1
 fi
-LESEN_ONCLICK=$(grep "Lesen" -A 200 "$TARGET" | grep -c "onclick=\"selectOption" || echo 0)
-LESEN_DATA_ANSWER=$(grep "Lesen" -A 200 "$TARGET" | grep -c "data-answer" || echo 0)
-if [ "$LESEN_ONCLICK" -eq 0 ] || [ "$LESEN_DATA_ANSWER" -eq 0 ]; then
-    echo "❌ 阅读缺少答题功能: onclick=$LESEN_ONCLICK, data-answer=$LESEN_DATA_ANSWER"
+
+# 检查阅读选项是否可点击
+LESEN_OPTIONS=$(grep "Lesen" -A 300 "$TARGET" | grep "class=\"option\"" | head -10)
+LESEN_CLICKABLE=$(echo "$LESEN_OPTIONS" | grep "onclick" | wc -l | tr -d ' ')
+
+echo "阅读选项示例:"
+echo "$LESEN_OPTIONS" | head -3 | sed 's/^/  /'
+echo "可点击数量: $LESEN_CLICKABLE"
+
+if [ "$LESEN_CLICKABLE" = "0" ] || [ -z "$LESEN_CLICKABLE" ]; then
+    echo ""
+    echo "❌❌❌ 严重错误：阅读选项无法点击！"
+    echo ""
+    echo "当前选项HTML:"
+    echo "$LESEN_OPTIONS" | head -2 | sed 's/^/  /'
+    echo ""
+    echo "应该是:"
+    echo "  <div class=\"option\" data-answer=\"a\" onclick=\"selectOption('lesen1', 'a', this)\">"
+    echo "    Richtig 正确"
+    echo "  </div>"
+    echo ""
+    echo "这是重复错误！已在PITFALLS记录多次！"
     exit 1
 fi
-echo "✅ 阅读：存在且有答题功能 (Lesen=$LESEN_COUNT, onclick=$LESEN_ONCLICK)"
+
+echo "✅ 阅读：有答题功能 (可点击选项=$LESEN_CLICKABLE)"
 
 # 3. 阅读：文章必须有翻译
 LESEN_TRANSLATION=$(grep -A 100 "Lesen" "$TARGET" | grep -c "中文翻译\|chinese-text" || echo 0)
