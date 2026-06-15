@@ -208,8 +208,8 @@
         }
 
         .task .option.selected {
-            border-color: #667eea;
-            background: #e6f2ff;
+            border-color: #667eea !important;
+            background: #e6f2ff !important;
         }
 
         .btn {
@@ -293,6 +293,14 @@
             background: #f7fafc;
             font-weight: 700;
         }
+    
+        /* 强制选中样式 - 最高优先级 */
+        body .task .option.selected {
+            border-color: #667eea !important;
+            background: #e6f2ff !important;
+            border-width: 3px !important;
+        }
+    
     </style>
 </head>
 <body>
