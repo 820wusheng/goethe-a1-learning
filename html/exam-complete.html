@@ -207,9 +207,20 @@
             background: #edf2f7;
         }
 
-        .task .option.selected {
+        body .task .option.selected {
             border-color: #667eea !important;
             background: #e6f2ff !important;
+            border-width: 3px !important;
+        }
+
+        .option.correct {
+            border-color: #48bb78;
+            background: #c6f6d5;
+        }
+
+        .option.incorrect {
+            border-color: #f56565;
+            background: #fed7d7;
         }
 
         .btn {
@@ -1052,109 +1063,81 @@ Mit freundlichen Grüßen
     </div>
 
     <script>
-        // Main section switching
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
+let answers = {};
+        let userAnswers = {};
+        let submitted = {};
+        
+        answers['lesen1'] = 'richtig';
+        
+        log("✅ 变量初始化完成");
+        log("answers: " + JSON.stringify(answers));
+        
+        function selectOption(taskId, answer, element) {
+            log(`📌 selectOption调用: taskId=${taskId}, answer=${answer}`);
+            
+            if (submitted[taskId]) {
+                log("⚠️ 已提交，忽略");
+                return;
+            }
+            
+            const taskElement = element.closest(".task");
+            log(`🔍 closest('.task'): ${taskElement ? 'found' : 'NOT FOUND'}`);
+            
+            if (!taskElement) {
+                log("❌ 错误：找不到.task元素");
+                return;
+            }
+            
+            taskElement.querySelectorAll(".option").forEach(opt => {
+                opt.classList.remove("selected");
             });
-            document.querySelectorAll('.main-nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Lesen part switching
-        function showLesenPart(partId) {
-            document.querySelectorAll('#lesen .part-content').forEach(part => {
-                part.classList.remove('active');
-            });
-            document.querySelectorAll('#lesen .part-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(partId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Schreiben part switching
-        function showSchreibenPart(partId) {
-            document.querySelectorAll('#schreiben .part-content').forEach(part => {
-                part.classList.remove('active');
-            });
-            document.querySelectorAll('#schreiben .part-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(partId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Sprechen part switching
-        function showSprechenPart(partId) {
-            document.querySelectorAll('#sprechen .part-content').forEach(part => {
-                part.classList.remove('active');
-            });
-            document.querySelectorAll('#sprechen .part-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(partId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Toggle translation
-        function toggleTranslation(elementId) {
-            const element = document.getElementById(elementId);
-            const button = event.target;
-
-            element.classList.toggle('show');
-
-            if (element.classList.contains('show')) {
-                button.textContent = '隐藏翻译';
+            log("🗑️ 清除所有selected");
+            
+            element.classList.add("selected");
+            log("✅ 添加selected到当前元素");
+            
+            userAnswers[taskId] = answer;
+            log("💾 保存答案: " + JSON.stringify(userAnswers));
+            
+            const submitBtn = taskElement.querySelector(".submit-btn");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                log("✅ 启用提交按钮");
             } else {
-                button.textContent = '显示翻译';
+                log("⚠️ 未找到提交按钮");
             }
         }
-    
-// 页面加载完成后，为所有选项添加事件监听（双重保险）
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔧 开始绑定阅读选项事件...');
-    
-    const options = document.querySelectorAll('.option[data-answer]');
-    console.log('找到选项数量:', options.length);
-    
-    options.forEach((opt, index) => {
-        // 从onclick属性提取参数
-        const onclickAttr = opt.getAttribute('onclick');
-        if (onclickAttr && onclickAttr.includes('selectOption')) {
-            // 提取参数
-            const match = onclickAttr.match(/selectOption\('([^']+)',\s*'([^']+)',\s*this\)/);
-            if (match) {
-                const taskId = match[1];
-                const answer = match[2];
-                
-                // 添加事件监听（优先级更高）
-                opt.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('🖱️ 点击事件触发:', taskId, answer);
-                    selectOption(taskId, answer, this);
-                }, true); // useCapture=true，最先触发
-                
-                console.log(`绑定 #${index+1}:`, taskId, answer);
+        
+        function submitAnswer(taskId) {
+            log(`📤 submitAnswer调用: taskId=${taskId}`);
+            
+            if (!userAnswers[taskId]) {
+                log("❌ 错误：未选择答案");
+                return;
+            }
+            
+            submitted[taskId] = true;
+            const correct = answers[taskId];
+            const user = userAnswers[taskId];
+            const isCorrect = (user === correct);
+            
+            log(`📊 正确答案: ${correct}, 用户答案: ${user}`);
+            log(`${isCorrect ? '✅ 正确！' : '❌ 错误'}`);
+            
+            const msg = document.querySelector(".result-message");
+            if (msg) {
+                msg.textContent = isCorrect ? "✓ 正确！" : "✗ 错误";
+                msg.style.display = "block";
+                msg.style.padding = "10px";
+                msg.style.marginTop = "10px";
+                msg.style.background = isCorrect ? "#c6f6d5" : "#fed7d7";
+                msg.style.color = isCorrect ? "#22543d" : "#742a2a";
             }
         }
-    });
-    
-    console.log('✅ 事件绑定完成');
-});
-
 </script>
 <!-- 交互功能JS（从listening-complete提取）-->
 <script>
-let answers = {};
+
 // 阅读答案数据
 answers['lesen1'] = 'falsch';
 answers['lesen2'] = 'richtig';
