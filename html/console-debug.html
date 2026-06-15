@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Console调试指南</title>
+    <style>
+        body { font-family: Arial; padding: 20px; line-height: 1.8; }
+        h1 { color: #667eea; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; }
+        pre { background: #000; color: #0f0; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .step { background: #e6f2ff; padding: 15px; margin: 15px 0; border-left: 4px solid #667eea; }
+        .important { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🔍 阅读答题Console调试指南</h1>
+    
+    <div class="step">
+        <h2>步骤1: 打开试卷页面</h2>
+        <p>打开: <a href="https://820wusheng.github.io/goethe-a1-learning/html/uebungssatz01.html" target="_blank">uebungssatz01.html</a></p>
+    </div>
+    
+    <div class="step">
+        <h2>步骤2: 打开Console</h2>
+        <p>按 <code>F12</code> 或 <code>右键 → 检查 → Console标签</code></p>
+    </div>
+    
+    <div class="step">
+        <h2>步骤3: 在Console中逐行运行以下命令</h2>
+        <p class="important">复制每一行，粘贴到Console，按回车</p>
+        
+        <h3>检查1: 变量是否存在</h3>
+        <pre>console.log('answers:', typeof answers);
+console.log('userAnswers:', typeof userAnswers);
+console.log('submitted:', typeof submitted);</pre>
+        <p>✅ 应该都显示 "object"，如果是"undefined"说明变量未初始化</p>
+        
+        <h3>检查2: 函数是否存在</h3>
+        <pre>console.log('selectOption:', typeof selectOption);
+console.log('submitAnswer:', typeof submitAnswer);</pre>
+        <p>✅ 应该都显示 "function"，如果是"undefined"说明函数未定义</p>
+        
+        <h3>检查3: 查找第一个阅读选项</h3>
+        <pre>const opt = document.querySelector('.option[onclick*="lesen1"]');
+console.log('找到选项:', opt);
+console.log('选项内容:', opt ? opt.textContent : 'NOT FOUND');</pre>
+        <p>✅ 应该显示选项元素和内容"a Richtig 正确"</p>
+        
+        <h3>检查4: 查找.task父元素</h3>
+        <pre>const opt = document.querySelector('.option[onclick*="lesen1"]');
+const task = opt.closest('.task');
+console.log('找到task:', task);
+console.log('task ID:', task ? task.id : 'NOT FOUND');</pre>
+        <p>✅ 应该显示task元素和ID "task-lesen1"</p>
+        
+        <h3>检查5: 手动调用selectOption</h3>
+        <pre>const opt = document.querySelector('.option[onclick*="lesen1"]');
+selectOption('lesen1', 'richtig', opt);
+console.log('调用完成，检查是否添加selected class:', opt.classList.contains('selected'));</pre>
+        <p>✅ 应该显示 true，并且选项应该变蓝保持不消失</p>
+        
+        <h3>检查6: 查看CSS规则</h3>
+        <pre>const opt = document.querySelector('.option[onclick*="lesen1"]');
+opt.classList.add('selected');
+const styles = window.getComputedStyle(opt);
+console.log('border-color:', styles.borderColor);
+console.log('background:', styles.background);</pre>
+        <p>✅ border-color应该包含 "102, 126, 234"（蓝色），background应该包含浅蓝</p>
+    </div>
+    
+    <div class="step">
+        <h2>步骤4: 报告结果</h2>
+        <p>截图Console输出，告诉我：</p>
+        <ul>
+            <li>哪一步失败了？</li>
+            <li>错误信息是什么？</li>
+            <li>检查5执行后，选项是否保持蓝色？</li>
+        </ul>
+    </div>
+    
+    <h2>常见问题</h2>
+    <ul>
+        <li><strong>变量undefined</strong> → JS未加载或作用域错误</li>
+        <li><strong>函数undefined</strong> → script标签位置错误或被覆盖</li>
+        <li><strong>closest返回null</strong> → HTML结构错误</li>
+        <li><strong>手动调用成功但点击失败</strong> → onclick事件被阻止</li>
+        <li><strong>添加了selected但没变色</strong> → CSS被覆盖</li>
+    </ul>
+</body>
+</html>
