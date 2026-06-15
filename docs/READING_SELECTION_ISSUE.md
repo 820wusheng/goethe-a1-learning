@@ -147,3 +147,67 @@
 3. **CSS权重** - 复杂页面需要更高的选择器权重
 4. **缓存问题** - 部署后提示用户强制刷新
 5. **用户参与** - 让用户测试调试页面定位问题
+
+---
+
+## 2026-06-15 持续问题：用户仍报告选不中
+
+### 新措施
+
+#### 1. 创建极简测试页面
+**文件**: `reading-simple-test.html`
+- ✅ 完全内联样式（排除CSS冲突）
+- ✅ 简化JS（排除复杂逻辑）
+- ✅ 详细日志输出
+- ✅ 完全独立（无依赖）
+
+**目的**: 确认浏览器兼容性和基本功能
+
+#### 2. 强制CSS优先级
+**方法**: 使用`!important`
+```css
+body .task .option.selected {
+    border-color: #667eea !important;
+    background: #e6f2ff !important;
+    border-width: 3px !important;
+}
+```
+
+**目的**: 确保样式不被任何其他规则覆盖
+
+### 测试矩阵
+
+| 页面 | 用途 | 地址 |
+|------|------|------|
+| reading-simple-test.html | 极简测试 | /html/reading-simple-test.html |
+| debug-reading-test.html | 调试测试 | /html/debug-reading-test.html |
+| uebungssatz01.html | 实际试卷 | /html/uebungssatz01.html |
+
+### 诊断流程
+
+```
+1. 测试 reading-simple-test.html
+   ├─ 工作 → 问题在试卷页面复杂性
+   └─ 不工作 → 浏览器兼容性问题
+
+2. 如果simple工作，测试 debug-reading-test.html  
+   ├─ 工作 → CSS权重问题（已用!important修复）
+   └─ 不工作 → JS加载问题
+
+3. 如果debug工作，测试 uebungssatz01.html
+   ├─ 工作 → 问题解决
+   └─ 不工作 → 需要截图Console错误
+```
+
+### 用户检查清单
+
+- [ ] 强制刷新（Ctrl+Shift+R 或 Cmd+Shift+R）
+- [ ] 测试3个页面（simple, debug, uebungssatz01）
+- [ ] 打开Console (F12) 查看错误
+- [ ] 截图点击时的现象
+- [ ] 报告浏览器类型和版本
+
+### Skill更新
+
+创建 `force-css-important.sh` 和 `emergency-fix-reading.sh`
+
