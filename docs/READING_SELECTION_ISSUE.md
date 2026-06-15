@@ -211,3 +211,120 @@ body .task .option.selected {
 
 创建 `force-css-important.sh` 和 `emergency-fix-reading.sh`
 
+
+---
+
+## 2026-06-15 用户反馈：点击变蓝但抬起就消失
+
+### 症状描述
+- 点击选项时会变蓝（`:hover`效果）
+- 鼠标抬起后蓝色消失
+- 没有保持选中状态
+
+### 问题分析
+
+**关键发现**: 变蓝是`:hover`CSS，不是`.selected` class
+
+这说明：
+1. ✅ CSS加载正常（`:hover`有效）
+2. ❌ `selectOption`函数**没有执行**或执行失败
+3. ❌ `.selected` class没有被添加
+
+### 可能原因
+
+#### 原因1: onclick事件被阻止
+- 父元素捕获了事件
+- event.preventDefault()被调用
+- 事件冒泡问题
+
+#### 原因2: JS函数未定义
+- 作用域问题
+- 函数被覆盖
+- script未加载
+
+#### 原因3: closest('.task')返回null
+- HTML结构错误
+- 选择器不匹配
+
+### 最终解决方案
+
+#### 方案1: addEventListener双重保险（commit 8c8cf0d）
+
+```javascript
+// 页面加载时自动绑定所有选项
+document.addEventListener('DOMContentLoaded', function() {
+    const options = document.querySelectorAll('.option[data-answer]');
+    options.forEach(opt => {
+        opt.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectOption(taskId, answer, this);
+        }, true); // useCapture=true，优先触发
+    });
+});
+```
+
+**优势**:
+- 不依赖onclick属性
+- 优先级更高（useCapture）
+- 阻止事件冒泡
+
+#### 方案2: 添加Console日志
+
+```javascript
+function selectOption(taskId, answer, element) {
+    console.log('✅ selectOption called:', taskId, answer);
+    // ...
+}
+```
+
+**用途**:
+- 确认函数是否被调用
+- 调试参数是否正确
+- 定位问题位置
+
+### Console调试指南
+
+创建 `console-debug.html` 提供逐步调试命令：
+https://820wusheng.github.io/goethe-a1-learning/html/console-debug.html
+
+**调试步骤**:
+1. 检查变量: `console.log(typeof answers)`
+2. 检查函数: `console.log(typeof selectOption)`
+3. 查找元素: `document.querySelector('.option')`
+4. 测试closest: `element.closest('.task')`
+5. 手动调用: `selectOption('lesen1', 'richtig', element)`
+6. 检查CSS: `window.getComputedStyle(element)`
+
+### 用户测试步骤
+
+**测试1: Console日志检查**
+1. 强制刷新（Ctrl+Shift+R）
+2. 打开试卷页面
+3. 按F12打开Console
+4. 应该看到：
+   ```
+   🔧 开始绑定阅读选项事件...
+   找到选项数量: 22
+   绑定 #1: lesen1, richtig
+   ...
+   ✅ 事件绑定完成
+   ```
+5. 点击选项，应该看到：
+   ```
+   🖱️ 点击事件触发: lesen1, richtig
+   ✅ selectOption called: lesen1, richtig
+   ```
+
+**结果判断**:
+- ✅ 有日志 + 选项保持选中 → 问题解决
+- ✅ 有日志 + 选项不保持选中 → CSS权重问题（已用!important修复）
+- ❌ 无日志 → JS未加载或被禁用
+
+### Skill更新
+
+创建 `fix-onclick-inline.sh`:
+- ✅ 添加addEventListener
+- ✅ 添加Console日志
+- ✅ 双重事件绑定保险
+
