@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>阅读答题调试</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .task { background: #f0f0f0; padding: 20px; margin: 20px 0; }
+        .option {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+        .option.selected {
+            border-color: #667eea;
+            background: #e6f2ff;
+        }
+        .submit-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #debug-log {
+            background: #000;
+            color: #0f0;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>阅读答题功能调试</h1>
+    <p>打开浏览器Console (F12) 查看详细日志</p>
+    
+    <div class="task" id="task-lesen1">
+        <h3>测试题目 1</h3>
+        <p>问题：这是一道测试题</p>
+        <div class="options">
+            <div class="option" data-answer="richtig" onclick="selectOption('lesen1', 'richtig', this)">
+                <strong>a</strong> Richtig 正确
+            </div>
+            <div class="option" data-answer="falsch" onclick="selectOption('lesen1', 'falsch', this)">
+                <strong>b</strong> Falsch 错误
+            </div>
+        </div>
+        <button class="submit-btn" disabled onclick="submitAnswer('lesen1')">提交答案</button>
+        <div class="result-message"></div>
+    </div>
+    
+    <div id="debug-log"></div>
+
+    <script>
+        const debugLog = document.getElementById('debug-log');
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            debugLog.innerHTML += `[${time}] ${msg}<br>`;
+            console.log(msg);
+        }
+        
+        log("🔧 Script开始执行");
+        
+        let answers = {};
+        let userAnswers = {};
+        let submitted = {};
+        
+        answers['lesen1'] = 'richtig';
+        
+        log("✅ 变量初始化完成");
+        log("answers: " + JSON.stringify(answers));
+        
+        function selectOption(taskId, answer, element) {
+            log(`📌 selectOption调用: taskId=${taskId}, answer=${answer}`);
+            
+            if (submitted[taskId]) {
+                log("⚠️ 已提交，忽略");
+                return;
+            }
+            
+            const taskElement = element.closest(".task");
+            log(`🔍 closest('.task'): ${taskElement ? 'found' : 'NOT FOUND'}`);
+            
+            if (!taskElement) {
+                log("❌ 错误：找不到.task元素");
+                return;
+            }
+            
+            taskElement.querySelectorAll(".option").forEach(opt => {
+                opt.classList.remove("selected");
+            });
+            log("🗑️ 清除所有selected");
+            
+            element.classList.add("selected");
+            log("✅ 添加selected到当前元素");
+            
+            userAnswers[taskId] = answer;
+            log("💾 保存答案: " + JSON.stringify(userAnswers));
+            
+            const submitBtn = taskElement.querySelector(".submit-btn");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                log("✅ 启用提交按钮");
+            } else {
+                log("⚠️ 未找到提交按钮");
+            }
+        }
+        
+        function submitAnswer(taskId) {
+            log(`📤 submitAnswer调用: taskId=${taskId}`);
+            
+            if (!userAnswers[taskId]) {
+                log("❌ 错误：未选择答案");
+                return;
+            }
+            
+            submitted[taskId] = true;
+            const correct = answers[taskId];
+            const user = userAnswers[taskId];
+            const isCorrect = (user === correct);
+            
+            log(`📊 正确答案: ${correct}, 用户答案: ${user}`);
+            log(`${isCorrect ? '✅ 正确！' : '❌ 错误'}`);
+            
+            const msg = document.querySelector(".result-message");
+            if (msg) {
+                msg.textContent = isCorrect ? "✓ 正确！" : "✗ 错误";
+                msg.style.display = "block";
+                msg.style.padding = "10px";
+                msg.style.marginTop = "10px";
+                msg.style.background = isCorrect ? "#c6f6d5" : "#fed7d7";
+                msg.style.color = isCorrect ? "#22543d" : "#742a2a";
+            }
+        }
+        
+        log("✅ Script执行完成");
+        log("👆 请点击上面的选项测试");
+    </script>
+</body>
+</html>
