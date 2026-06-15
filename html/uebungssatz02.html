@@ -1117,7 +1117,41 @@ Mit freundlichen Grüßen
                 button.textContent = '显示翻译';
             }
         }
-    </script>
+    
+// 页面加载完成后，为所有选项添加事件监听（双重保险）
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔧 开始绑定阅读选项事件...');
+    
+    const options = document.querySelectorAll('.option[data-answer]');
+    console.log('找到选项数量:', options.length);
+    
+    options.forEach((opt, index) => {
+        // 从onclick属性提取参数
+        const onclickAttr = opt.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes('selectOption')) {
+            // 提取参数
+            const match = onclickAttr.match(/selectOption\('([^']+)',\s*'([^']+)',\s*this\)/);
+            if (match) {
+                const taskId = match[1];
+                const answer = match[2];
+                
+                // 添加事件监听（优先级更高）
+                opt.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🖱️ 点击事件触发:', taskId, answer);
+                    selectOption(taskId, answer, this);
+                }, true); // useCapture=true，最先触发
+                
+                console.log(`绑定 #${index+1}:`, taskId, answer);
+            }
+        }
+    });
+    
+    console.log('✅ 事件绑定完成');
+});
+
+</script>
 <!-- 交互功能JS（从listening-complete提取）-->
 <script>
 let answers = {};
@@ -1137,6 +1171,7 @@ let userAnswers = {};
 let submitted = {};
 
 function selectOption(taskId, answer, element) {
+    console.log('✅ selectOption called:', taskId, answer);
     if (submitted[taskId]) return;
     const taskElement = element.closest(".task");
     if (!taskElement) return;
