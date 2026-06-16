@@ -223,6 +223,28 @@
             background: #fed7d7;
         }
 
+        .result-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .result-message.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #48bb78;
+            display: block;
+        }
+
+        .result-message.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #f56565;
+            display: block;
+        }
+
         .btn {
             padding: 10px 20px;
             border: none;
@@ -1213,32 +1235,6 @@ answers['lesen2'] = 'a';  // Richtig
             }
         }
         
-        function submitAnswer(taskId) {
-            log(`📤 submitAnswer调用: taskId=${taskId}`);
-            
-            if (!userAnswers[taskId]) {
-                log("❌ 错误：未选择答案");
-                return;
-            }
-            
-            submitted[taskId] = true;
-            const correct = answers[taskId];
-            const user = userAnswers[taskId];
-            const isCorrect = (user === correct);
-            
-            log(`📊 正确答案: ${correct}, 用户答案: ${user}`);
-            log(`${isCorrect ? '✅ 正确！' : '❌ 错误'}`);
-            
-            const msg = document.querySelector(".result-message");
-            if (msg) {
-                msg.textContent = isCorrect ? "✓ 正确！" : "✗ 错误";
-                msg.style.display = "block";
-                msg.style.padding = "10px";
-                msg.style.marginTop = "10px";
-                msg.style.background = isCorrect ? "#c6f6d5" : "#fed7d7";
-                msg.style.color = isCorrect ? "#22543d" : "#742a2a";
-            }
-        }
 
 </script>
 <!-- 交互功能JS（从listening-complete提取）-->
