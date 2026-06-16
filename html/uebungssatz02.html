@@ -357,215 +357,49 @@
             <div id="lesen1" class="part-content active">
                 <h3 style="color: #667eea; margin-bottom: 20px;">Teil 1: Lesen Sie die beiden Texte und die Aufgaben 1 bis 5</h3>
 
-                <div class="task" id="task-lesen1">
-                    <div class="task-header">
-                        <div class="task-title">Beispiel 示例</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_bsp')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Lis Zug kommt aus Hannover.</div>
-                    <div id="lesen_bsp" class="task-text chinese">莉的火车来自汉诺威。</div>
-                    <div class="email-box">Hallo Li,
+<div class="task" id="task-lesen1">
+    <div class="task-header">
+        <div class="task-title">Beispiel 示例</div>
+        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_bsp')">显示翻译</button>
+    </div>
+    <div class="task-text german">Lis Zug kommt aus Hannover.</div>
+    <div id="lesen_bsp" class="task-text chinese">莉的火车来自汉诺威。</div>
+    
+    <div class="options">
+        <div class="option" data-answer="a" onclick="selectOption('lesen1', 'a', this)">
+            <strong>a</strong> Richtig 正确
+        </div>
+        <div class="option" data-answer="b" onclick="selectOption('lesen1', 'b', this)">
+            <strong>b</strong> Falsch 错误
+        </div>
+    </div>
+    
+    <button class="submit-btn" disabled onclick="submitAnswer('lesen1')">提交答案</button>
+    <div class="result-message"></div>
+</div>
 
-danke für deine Mail. Dein Zug kommt hier in Hannover um 12.36 Uhr an. Ich bin ab 12.15 Uhr im Hauptbahnhof und warte auf dich vor der Auskunft.
+<div class="task" id="task-lesen2">
+    <div class="task-header">
+        <div class="task-title">Aufgabe 1</div>
+        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_1')">显示翻译</button>
+    </div>
+    <div class="task-text german">Lis Zug kommt nach halb eins an.</div>
+    <div id="lesen_1" class="task-text chinese">莉的火车在12:30后到达。</div>
+    
+    <div class="options">
+        <div class="option" data-answer="a" onclick="selectOption('lesen2', 'a', this)">
+            <strong>a</strong> Richtig 正确
+        </div>
+        <div class="option" data-answer="b" onclick="selectOption('lesen2', 'b', this)">
+            <strong>b</strong> Falsch 错误
+        </div>
+    </div>
+    
+    <button class="submit-btn" disabled onclick="submitAnswer('lesen2')">提交答案</button>
+    <div class="result-message"></div>
+</div>
 
-Du kannst mich den ganzen Vormittag auf meinem Handy (++49 173 62 205 59) erreichen.
-
-Deine
-Karin</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen1, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen1, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen1')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-
-                <div class="task" id="task-lesen2">
-                    <div class="task-header">
-                        <div class="task-title">Aufgabe 1</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_1')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Lis Zug kommt nach halb eins an.</div>
-                    <div id="lesen_1" class="task-text chinese">莉的火车在12:30后到达。</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen2, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen2, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen2')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-
-                <div class="task" id="task-lesen3">
-                    <div class="task-header">
-                        <div class="task-title">Aufgabe 2</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_2')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Karin wartet den ganzen Vormittag vor der Auskunft.</div>
-                    <div id="lesen_2" class="task-text chinese">卡琳整个上午都在问讯处前等候。</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen3, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen3, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen3')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-
-                <div class="email-box">Liebe Carmen,
-
-am kommenden Sonntag habe ich Geburtstag. Ich möchte gerne mit dir feiern und lade dich herzlich zu meiner Party am Samstagabend ein.
-
-Wir fangen um 21 Uhr an. Ist das okay für dich? Es werden viele Leute da sein, die du auch kennst. Kannst du vielleicht einen Salat mitbringen? Und vergiss bitte nicht einen Pullover oder eine Jacke! Wir wollen nämlich draußen im Garten feiern.
-
-Ich freue mich sehr auf dich!
-
-Bis zum Wochenende
-Ralf</div>
-
-                <div class="task" id="task-lesen4">
-                    <div class="task-header">
-                        <div class="task-title">Aufgabe 3</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_3')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Ralf hatte am letzten Wochenende Geburtstag.</div>
-                    <div id="lesen_3" class="task-text chinese">拉尔夫上周末过生日。</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen4, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen4, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen4')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-
-                <div class="task" id="task-lesen5">
-                    <div class="task-header">
-                        <div class="task-title">Aufgabe 4</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_4')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Ralf hat nur zwei oder drei Leute eingeladen.</div>
-                    <div id="lesen_4" class="task-text chinese">拉尔夫只邀请了两三个人。</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen5, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen5, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen5')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-
-                <div class="task" id="task-lesen6">
-                    <div class="task-header">
-                        <div class="task-title">Aufgabe 5</div>
-                        <button class="btn btn-secondary" onclick="toggleTranslation('lesen_5')">显示翻译</button>
-                    </div>
-                    <div class="task-text german">Die Party findet draußen statt.</div>
-                    <div id="lesen_5" class="task-text chinese">派对在户外举行。</div>
-                    <div class="options">
-                        <div class="option" data-answer="richtig" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen6, richtig');
-})(this)"> Richtig 正确</div>Richtig 正确</div>
-                        <div class="option" data-answer="falsch" onclick="(function(el){
-var t=el.closest('.task');
-if(!t)return;
-t.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-el.classList.add('selected');
-var b=t.querySelector('.submit-btn');
-if(b){b.disabled=false;b.style.background='#667eea'};
-console.log('Selected: lesen6, falsch');
-})(this)"> Falsch 错误</div>Falsch 错误</div>
-                    </div>
-                        <button class="submit-btn" disabled onclick="submitAnswer('lesen6')">提交答案</button>
-                        <div class="result-message"></div>
-                </div>
-            </div>
-
-            <!-- Teil 2 -->
-            <div id="lesen2" class="part-content">
-                <h3 style="color: #667eea; margin-bottom: 20px;">Teil 2: Lesen Sie die Texte und die Aufgaben 6 bis 10</h3>
+<h3 style="color: #667eea; margin-bottom: 20px;">Teil 2: Lesen Sie die Texte und die Aufgaben 6 bis 10</h3>
                 <p style="margin-bottom: 20px;"><strong>Wo finden Sie Informationen? Kreuzen Sie an: a oder b</strong></p>
 
                 <div class="task" id="task-lesen7">
@@ -1331,10 +1165,14 @@ Mit freundlichen Grüßen
 
 
 let answers = {};
+// 阅读答案（使用a/b，与听力一致）
+answers['lesen1'] = 'b';  // Falsch
+answers['lesen2'] = 'a';  // Richtig
+
         let userAnswers = {};
         let submitted = {};
         
-        answers['lesen1'] = 'richtig';
+        
         
         log("✅ 变量初始化完成");
         log("answers: " + JSON.stringify(answers));
@@ -1407,7 +1245,7 @@ let answers = {};
 <script>
 
 // 阅读答案数据
-answers['lesen2'] = 'richtig';
+
 answers['lesen3'] = 'falsch';
 answers['lesen4'] = 'richtig';
 answers['lesen5'] = 'falsch';
