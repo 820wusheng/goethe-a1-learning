@@ -798,3 +798,209 @@ html = html.replace('<div id="sprechen3" ...>', ... + sprechen_teil3, 1)
 🔴 **口语3个Teil都要范文，不是只有Teil 1**
 🔴 **验证要检查taskId是固定的（grep "lesen1" 而非grep "lesen-"）**
 
+
+---
+
+## 🔴🔴🔴 2026-06-15 严重错误：复制代码删除了页面导航函数
+
+### 问题
+用户反馈：阅读口语写作都点不进去了
+
+### 症状
+- ❌ 无法切换到Lesen（阅读）
+- ❌ 无法切换到Schreiben（写作）
+- ❌ 无法切换到Sprechen（口语）
+- ❌ 只能看到Hören（听力）
+
+### 根本原因
+
+**copy-working-code.sh的致命错误**:
+
+```python
+# ❌ 错误：完全替换<script>内容
+exam = re.sub(
+    r'<script>.*?</script>',
+    '<script>\n' + debug_js + '\n</script>',  # 只有答题函数，删除了导航函数！
+    exam
+)
+```
+
+**删除的关键函数**:
+- `showSection()` - 主导航切换
+- `showLesenPart()` - 阅读部分切换
+- `showSchreibenPart()` - 写作部分切换
+- `showSprechenPart()` - 口语部分切换
+- `toggleTranslation()` - 翻译切换
+
+### Skill验证的致命缺陷
+
+**copy-working-code.sh的验证**:
+```python
+checks = {
+    ".option.selected !important": ...,
+    "function selectOption": ...,
+    "let answers": ...
+}
+```
+
+**问题**: 
+- ✅ 验证了答题功能
+- ❌ **没有验证页面导航功能**
+- ❌ **没有验证其他必需函数**
+
+**结果**: 
+- 验证通过 ✅
+- 但页面完全不能用 ❌
+
+### 正确的验证清单
+
+```python
+# ✅ 完整验证
+checks = {
+    # 答题功能
+    "function selectOption": "function selectOption" in content,
+    "function submitAnswer": "function submitAnswer" in content,
+    "let answers": "let answers" in content,
+    
+    # 页面导航功能（之前缺失！）
+    "function showSection": "function showSection" in content,
+    "function showLesenPart": "function showLesenPart" in content,
+    "function toggleTranslation": "function toggleTranslation" in content,
+    
+    # CSS
+    ".option.selected": ".option.selected" in content,
+}
+```
+
+### 正确的修复方法
+
+**不要完全替换，应该合并**:
+
+```python
+# ✅ 正确：提取旧版本的导航函数
+nav_functions = extract_navigation_functions(old_version)
+
+# ✅ 正确：提取调试页面的答题函数  
+answer_functions = extract_answer_functions(debug_version)
+
+# ✅ 正确：合并两部分
+merged_js = nav_functions + "\n\n" + answer_functions
+
+# ✅ 正确：替换
+exam = exam.replace("<script>", "<script>\n" + merged_js)
+```
+
+### 为何Skill自闭环没发现
+
+1. ❌ **验证不完整** - 只检查了3项，应该检查7项
+2. ❌ **没有功能测试** - 只检查代码存在，没测试能否点击
+3. ❌ **没有对比检查** - 没有对比修改前后的函数数量
+
+### 应该怎么验证
+
+**方法1: 函数数量对比**
+```bash
+BEFORE=$(grep -c "^function " old.html)
+AFTER=$(grep -c "^function " new.html)
+if [ "$AFTER" -lt "$BEFORE" ]; then
+    echo "❌ 函数数量减少！从 $BEFORE 到 $AFTER"
+    exit 1
+fi
+```
+
+**方法2: 关键函数清单**
+```bash
+REQUIRED_FUNCTIONS=(
+    "showSection"
+    "showLesenPart"
+    "selectOption"
+    "submitAnswer"
+    "toggleTranslation"
+)
+
+for func in "${REQUIRED_FUNCTIONS[@]}"; do
+    if ! grep -q "function $func" new.html; then
+        echo "❌ 缺少函数: $func"
+        exit 1
+    fi
+done
+```
+
+**方法3: 功能测试**
+```bash
+# 使用headless browser测试点击
+# 或至少检查onclick属性存在
+ONCLICK_NAV=$(grep -c 'onclick="showSection' new.html)
+if [ "$ONCLICK_NAV" -eq 0 ]; then
+    echo "❌ 页面导航onclick缺失"
+    exit 1
+fi
+```
+
+### Skill改进
+
+**更新copy-working-code.sh**:
+
+1. ✅ 不完全替换，改为合并
+2. ✅ 完整验证清单（7项）
+3. ✅ 函数数量对比
+4. ✅ 关键函数必检
+
+**创建comprehensive-verify.sh**:
+
+检查所有必需功能:
+- 页面导航
+- 答题功能
+- 翻译功能
+- CSS样式
+- 音频播放
+
+### 关键规则
+
+🔴 **复制/替换代码时必须保留原有所有功能**
+🔴 **验证必须覆盖所有功能点，不只是修改的部分**
+🔴 **Skill验证要对比修改前后的函数数量**
+🔴 **合并代码优于完全替换代码**
+🔴 **验证清单必须包含页面导航、答题、翻译等所有功能**
+
+### 永久避免方法
+
+**开发Skill时的检查清单**:
+
+```
+修改前:
+- [ ] 列出页面所有功能
+- [ ] 列出所有必需函数
+- [ ] 记录函数数量
+
+修改:
+- [ ] 使用合并而非替换
+- [ ] 保留所有原有函数
+- [ ] 只修改需要改的部分
+
+验证:
+- [ ] 检查所有必需函数存在
+- [ ] 对比函数数量未减少
+- [ ] 测试所有功能点
+- [ ] 本地浏览器测试
+
+部署前:
+- [ ] 再次完整验证
+- [ ] 功能清单全部勾选
+```
+
+### 修复结果
+
+```bash
+✅ 从8c8cf0d恢复导航函数
+✅ 保留当前的答题函数
+✅ 合并两部分功能
+✅ 验证showSection等函数存在
+✅ 部署
+```
+
+现在页面同时有:
+- ✅ 页面导航功能
+- ✅ 答题功能
+- ✅ 翻译功能
+
