@@ -1222,7 +1222,7 @@ function submitAnswer(taskId) {
     submitted[taskId] = true;
     const correct = answers[taskId];
     const user = userAnswers[taskId];
-    const taskElement = document.querySelector("#task-" + taskId) || document.querySelector("[data-task-id="" + taskId + ""]");
+    const taskElement = document.querySelector("#task-" + taskId) || document.querySelector("[data-task-id='" + taskId + "']");
     if (!taskElement) return;
     const isCorrect = (user === correct);
     taskElement.querySelectorAll(".option").forEach(opt => {
